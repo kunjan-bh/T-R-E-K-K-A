@@ -82,3 +82,15 @@
     font-size: 30px;
     font-family: "Nova Cut", sans-serif;
 }
+@media (min-width: 1600px){
+    .nav-container{
+        max-width: 1400px;
+        padding: 0 50px;
+    }
+    .nav-container .logo span{
+        font-size: 40px;
+    }
+    .nav-links ul li a{
+        font-size: 24px;
+    }
+}

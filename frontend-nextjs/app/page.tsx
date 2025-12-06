@@ -7,7 +7,6 @@ import PageTransition from "./../components/PageTransition";
 import Link from "next/link";
 
 export default function Home() {
-  // ✅ List of background images
   const backgrounds = [
     "/home1.png",
     "/home2.png",

@@ -439,3 +439,19 @@ span.tag{
     transform: translateY(-5px); /* adjust height of jump */
   }
 }
+@media (min-width: 1600px){
+    .form{
+        width: 550px;
+    }
+    span.login-faint {
+      font-size: 18px;
+    }
+    .login-content h1,
+    .signup-content h1{
+      font-size: 40px;
+    }
+    .login-content span.tag,
+    .signup-content span.tag{
+      font-size: 20px;
+    }
+}

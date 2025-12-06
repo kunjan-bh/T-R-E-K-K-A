@@ -1,6 +1,7 @@
 .dashboard-content{
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    min-height: 100vh;
     display: flex;
     overflow-x: clip;
     background-color: #ffffff;
@@ -9,10 +10,10 @@
 .selective-content{
     /* display: flex; */
     position: relative;
-    left: 4.5vw;
-    /* width: 100%; */
+    margin-left: 4.5vw;
     width: calc(100% - 4.5vw);
-    height: 100%;
+    min-height: 250vh;
+    height: auto;
     background-color: #ffffff;
     
 }
@@ -62,26 +63,28 @@
 .part-content-area{
     position: relative;
     top: 10vh;
-    /* left: 10vh; */
+    /* left: 10vw; */
     width: 100%;
-    height: (100%-4.5vw);
+    min-height: calc(100% - 10vh);
+    height: auto;
     display: flex;
     flex-direction: column;
     /* align-items: flex-start; */
     align-items: center;
-    padding: 30px;
+    padding: 60px 30px;
     background-color: #ffffff;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: visible;
     z-index: 1;
     gap: 8vh;
+    max-width: none!important;
 }
 .part-content-area-top,
 .part-content-area-bottom,
 .part-content-area-center{
     display: flex;
     justify-content: center;
-    gap: 10vw;
+    gap: 40px;
 }
 
 .part-content-area-top,
@@ -192,5 +195,32 @@
     }
     .part-content-area{
         width: calc(100% - 90px);
+    }
+}
+@media (min-width: 1600px) {
+    .journey-card,
+    .travel-stat-card,
+    .favourite-destination-card,
+    .photo-gallery-card,
+    .Weather-card,
+    .favSection{
+        justify-content: center;
+    }
+    .journey-card h1,
+    .travel-stat-card h1,
+    .favourite-destination-card h1,
+    .photo-gallery-card h1,
+    .Weather-card h1,
+    .favSection h1{
+        font-size: 25px;
+
+    }
+    .weather_default{
+        width: 12vw;
+        height: auto;
+    }
+    .weather_default img{
+        width: 100%;
+        height: auto;
     }
 }
