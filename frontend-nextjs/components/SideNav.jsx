@@ -2,7 +2,7 @@ import React from 'react'
 import PageTransition from "./PageTransition";
 import Link from 'next/link'
 
-const SideNav = () => {
+const SideNav = ({ handleOverview, handleTravelKit }) => {
   return (
     <div className="column-nav">
         <div className="logo">
@@ -20,7 +20,7 @@ const SideNav = () => {
                 <span>MANAGE</span>
             </div>
             <ul className='nav-flex'>
-                <li>
+                <li onClick={handleOverview}>
                     <Link href="">
                         <div className='nav-div'>
                             <div className="nav-icon">
@@ -46,7 +46,7 @@ const SideNav = () => {
                         </div>
                     </Link>
                 </li>
-                <li>
+                <li onClick={handleTravelKit}>
                     <Link href="">
                         <div className='nav-div'>
                             <div className="nav-icon">

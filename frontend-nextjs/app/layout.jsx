@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./../styles/page.css";
@@ -8,6 +7,7 @@ import "./../styles/login.css";
 import "./../styles/dashboard.css";
 import "./../styles/profileBtn.css";
 import "./../styles/notify.css";
+import "./../styles/TravelKit.css";
 import PageTransition from "@/components/PageTransition";
 
 const geistSans = Geist({
@@ -28,7 +28,7 @@ export const metadata = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
@@ -45,7 +45,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
       </body>
     </html>
-
   );
 }
-

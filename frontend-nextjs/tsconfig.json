@@ -37,7 +37,7 @@
     "**/*.mts",
     ".next\\dev/types/**/*.ts",
     ".next\\dev/types/**/*.ts"
-  ],
+, "components/SideNav.jsx", "components/ProfileBtn.jsx", "components/PageTransition.jsx", "components/Notify.jsx", "components/Navbar1.jsx", "app/page.jsx", "app/layout.jsx", "app/travelKit/page.jsx", "app/overview/page.jsx", "app/login/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

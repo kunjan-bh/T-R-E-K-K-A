@@ -124,6 +124,6 @@
 .column-nav:hover .text-content ul li .nav-div span{
     opacity: 1;
 }
-.nav-div:hover span{
-    color: black;
+.nav-flex li:hover .nav-div span{
+    color: rgb(0, 0, 0);
 }

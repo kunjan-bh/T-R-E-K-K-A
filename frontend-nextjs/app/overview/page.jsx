@@ -1,35 +1,9 @@
 "use client";
-import PageTransition from '@/components/PageTransition'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import SideNav from "./../../components/SideNav";
-import ProfileBtn from '@/components/ProfileBtn';
-import Notify from '@/components/Notify';
-const Dashboard = () => {
-  const backgrounds = [
-    "/side1.png",
-    "/side2.png",
-    "/side3.png",
-  ];
-  const texts = [
-    "TEMPLES",
-    "HILLS",
-    "PEAKS",
-  ];
-  const [currentBg, setCurrentBg] = useState(0);
-  const [currentTitle, setCurrentTitle] = useState(0);
+import ProfileBtn from "@/components/ProfileBtn";
+import Notify from "@/components/Notify";
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBg((prev) => (prev + 1) % backgrounds.length);
-      setCurrentTitle((prev) => (prev + 1) % texts.length);
-    }, 4000); // every 3 seconds
-
-    return () => clearInterval(interval);
-  }, []);
-  return (
-    <div className='dashboard-content'>
-        <SideNav></SideNav>
+const Overview = () => {
+    return (
         <div className="selective-content">
           <div className="dasNav">
             <h1>DASHBOARD</h1>
@@ -95,9 +69,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </div>
-    
-  )
-}
-
-export default Dashboard
+    );
+};
+export default Overview;

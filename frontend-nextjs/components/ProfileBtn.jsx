@@ -3,14 +3,14 @@ import React, { useState, useRef, useEffect } from "react";
 
 const ProfileBtn = () => {
   const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef(null);
 
   const toggleMenu = () => setOpen(!open);
 
   
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
         setOpen(false);
       }
     };
