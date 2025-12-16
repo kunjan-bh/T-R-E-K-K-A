@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth import authenticate, get_user_model
 from datetime import timedelta
 from .serializers import (
@@ -14,6 +13,7 @@ from .serializers import (
 )
 
 User = get_user_model()
+
 
 class RegisterView(generics.CreateAPIView):
     """
@@ -28,20 +28,19 @@ class RegisterView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-
+        
+        # Generate JWT tokens for the new user
         refresh = RefreshToken.for_user(user)
+        
+        return Response({
+            'user': UserSerializer(user).data,
+            'message': 'User registered successfully',
+            'tokens': {
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }
+        }, status=status.HTTP_201_CREATED)
 
-        return Response(
-            {
-                'user':UserSerializer(user).data,
-                'message':'User registered successfully',
-                'token':{
-                    'refresh':str(refresh),
-                    'access':str(refresh.access_token),
-                }
-            },status=status.HTTP_201_CREATED
-        )
-    
 
 class LoginView(APIView):
     """
@@ -54,37 +53,41 @@ class LoginView(APIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
+        
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
-        remember_me = serializer.validated_data.get('remember_me',False)
-
+        remember_me = serializer.validated_data.get('remember_me', False)
+        
+        # Authenticate user
         user = authenticate(request, email=email, password=password)
-
+        
         if user is not None:
             if not user.is_active:
-                return Response(
-                    {
-                        'error':"This account has been disabled"
-                    }, status=status.HTTP_403_FORBIDDEN
-                )
+                return Response({
+                    'error': 'This account has been disabled.'
+                }, status=status.HTTP_403_FORBIDDEN)
+            
+            # Generate tokens
             refresh = RefreshToken.for_user(user)
+            
+            # Adjust token lifetime based on "remember me"
             if remember_me:
                 refresh.set_exp(lifetime=timedelta(days=30))
             else:
                 refresh.set_exp(lifetime=timedelta(days=1))
+            
             return Response({
-                'user':UserSerializer(user).data,
-                'tokens':{
-                    'refresh':str(refresh),
-                    'access':str(refresh.access_token),
+                'user': UserSerializer(user).data,
+                'tokens': {
+                    'refresh': str(refresh),
+                    'access': str(refresh.access_token),
                 },
-                'message':'Login Successful'
+                'message': 'Login successful'
             }, status=status.HTTP_200_OK)
         else:
             return Response({
-                'error':'Invalid email or password'
+                'error': 'Invalid email or password'
             }, status=status.HTTP_401_UNAUTHORIZED)
-        
 
 
 class LogoutView(APIView):
@@ -94,24 +97,24 @@ class LogoutView(APIView):
     """
     permission_classes = (IsAuthenticated,)
 
-    def post(self,request):
+    def post(self, request):
         try:
             refresh_token = request.data.get("refresh")
             if refresh_token:
                 token = RefreshToken(refresh_token)
                 token.blacklist()
                 return Response({
-                    'message':'logout successful'
-                },status=status.HTTP_200_OK)
+                    'message': 'Logout successful'
+                }, status=status.HTTP_200_OK)
             else:
                 return Response({
-                    'error':"Refresh token is required"
+                    'error': 'Refresh token is required'
                 }, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({
-                'error':str(e)
+                'error': str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
-        
+
 
 class UserDetailView(generics.RetrieveUpdateAPIView):
     """
@@ -123,7 +126,7 @@ class UserDetailView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
-    
+
 
 class ChangePasswordView(APIView):
     """
@@ -134,17 +137,11 @@ class ChangePasswordView(APIView):
 
     def post(self, request):
         serializer = ChangePasswordSerializer(data=request.data, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = request.user
-
-        # Validate old password
-        old_password = serializer.validated_data.get('old_password')
-        if not user.check_password(old_password):
-            return Response(
-                {'old_password': 'Wrong password'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        user.set_password(serializer.validated_data['new_password'])
-        user.save()
-        return Response({'message': 'Password changed successfully'}, status=status.HTTP_200_OK)
+        if serializer.is_valid():
+            user = request.user
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+            return Response({
+                'message': 'Password changed successfully'
+            }, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

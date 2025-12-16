@@ -2,6 +2,7 @@ import React from 'react'
 import PageTransition from "./PageTransition";
 import Link from 'next/link'
 
+
 const SideNav = ({ handleOverview, handleTravelKit }) => {
   return (
     <div className="column-nav">

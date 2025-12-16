@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from rest_framework.validators import UniqueValidator
+from dj_rest_auth.registration.serializers import RegisterSerializer as BaseRegisterSerializer
 
 User = get_user_model()
 
@@ -17,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RegisterSerializer(serializers.ModelSerializer):
     """
-    Serializer for user registration
+    Serializer for user registration (for our custom endpoint)
     """
 
     email = serializers.EmailField(
@@ -33,7 +34,6 @@ class RegisterSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(
         write_only=True,
         required=True,
-        validators=[validate_password],
         style={'input_type':'password'}
     )
     is_from_nepal = serializers.BooleanField(required=False, default=False)
@@ -50,13 +50,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         """
         Check that the two password entries match
         """
-        if attrs['password'] !=attrs['password2']:
-            raise serializers.ValidationError({"password2":"password fields didnt match."})
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({"password2":"Password fields didn't match."})
         return attrs
     
-    def create(self,validated_data):
+    def create(self, validated_data):
         """
-        create and return a new user instance
+        Create and return a new user instance
         """
         validated_data.pop('password2')
         user = User.objects.create_user(
@@ -67,6 +67,30 @@ class RegisterSerializer(serializers.ModelSerializer):
             is_from_nepal=validated_data.get('is_from_nepal', False)
         )
         return user
+
+
+class CustomRegisterSerializer(BaseRegisterSerializer):
+    """
+    Custom registration serializer for django-allauth (for social auth)
+    Extends dj-rest-auth's RegisterSerializer to add our custom field
+    """
+    is_from_nepal = serializers.BooleanField(required=False, default=False)
+
+    def get_cleaned_data(self):
+        """
+        Return cleaned data with our custom field
+        """
+        data = super().get_cleaned_data()
+        data['is_from_nepal'] = self.validated_data.get('is_from_nepal', False)
+        return data
+
+    def custom_signup(self, request, user):
+        """
+        Save custom fields during signup (called by allauth)
+        """
+        user.is_from_nepal = self.validated_data.get('is_from_nepal', False)
+        user.save()
+
     
 class LoginSerializer(serializers.Serializer):
     """
@@ -80,14 +104,15 @@ class LoginSerializer(serializers.Serializer):
     )
     remember_me = serializers.BooleanField(required=False, default=False)
 
+
 class ChangePasswordSerializer(serializers.Serializer):
     """
-    serializer for password change endpoint
+    Serializer for password change endpoint
     """
     old_password = serializers.CharField(required=True, write_only=True)
     new_password = serializers.CharField(required=True, write_only=True, validators=[validate_password])
 
-    def validate_old_password(self,value):
+    def validate_old_password(self, value):
         user = self.context['request'].user
         if not user.check_password(value):
             raise serializers.ValidationError("Old password is incorrect")

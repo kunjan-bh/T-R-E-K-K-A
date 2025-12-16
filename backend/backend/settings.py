@@ -158,32 +158,28 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-# Django Allauth Settings
+# Django Allauth Settings (Updated for newer versions)
 SITE_ID = 1
 
 # Email backend (for development, prints to console)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# For production, use actual email backend:
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# Modern allauth configuration (replaces deprecated settings)
+ACCOUNT_LOGIN_METHODS = {'email'}  # Replaces ACCOUNT_AUTHENTICATION_METHOD
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']  # Replaces EMAIL_REQUIRED and USERNAME_REQUIRED
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
+# Additional allauth settings
 ACCOUNT_EMAIL_VERIFICATION = 'optional'  # Change to 'mandatory' in production
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None  # We don't have a username field
 ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
+
+# Social account settings
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 
-# Social Authentication Settings
+# Social Authentication Providers
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -221,10 +217,21 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+# Custom Adapters for django-allauth
+ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'accounts.adapters.CustomSocialAccountAdapter'
+
 # dj-rest-auth settings
 REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'auth-token',
     'JWT_AUTH_REFRESH_COOKIE': 'refresh-token',
-    'JWT_AUTH_HTTPONLY': False,  # Set to True in production with proper CORS
+    'JWT_AUTH_HTTPONLY': False,
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer',
 }
+
+import warnings
+
+# Suppress django-allauth deprecation warnings
+warnings.filterwarnings('ignore', message='app_settings.USERNAME_REQUIRED is deprecated')
+warnings.filterwarnings('ignore', message='app_settings.EMAIL_REQUIRED is deprecated')
