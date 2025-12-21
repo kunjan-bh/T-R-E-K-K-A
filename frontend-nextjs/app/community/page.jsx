@@ -86,9 +86,9 @@ const Community = () => {
                     </div>
                 </div>
                 <div className="scroll-down">
-                    <div class="container_mouse">
-                        <span class="mouse-btn">
-                            <span class="mouse-scroll"></span>
+                    <div className="container_mouse">
+                        <span className="mouse-btn">
+                            <span className="mouse-scroll"></span>
                         </span>
                         {/* <span>Scroll Down</span> */}
                     </div>

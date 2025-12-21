@@ -1,6 +1,11 @@
+
 .travelKit-content-inner {
-    padding: 150px 80px 20px 80px;
-    width: 95vw;
+    padding: 50px 80px 20px 80px;
+    width: 100%;
+    max-width: 100%;
+}
+.travelKit-content{
+    width: 100%;
 }
 .travelKit-content-upper{
     display: flex;
