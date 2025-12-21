@@ -25,14 +25,14 @@ const Community = () => {
                     <div className="post-pattern">
                         <div className="post-pattern-single">
                             <div className="post-img">
-                                <img src="" alt="" />
+                                <img src="#" alt="" />
                             </div>
                             <div className="post-info">
                                 <h2>Title Default</h2>
                                 <div className="post-user">
                                     <div className="post-user-info">
                                         <div className="profile-img">
-                                            <img src="" alt="" />
+                                            <img src="#" alt="" />
                                         </div>
                                         <span>Username</span>
                                     </div>
@@ -46,14 +46,14 @@ const Community = () => {
                         <div className="post-pattern-multi">
                             <div className="post-pattern-multi-1">
                                 <div className="post-img">
-                                    <img src="" alt="" />
+                                    <img src="#" alt="" />
                                 </div>
                                 <div className="post-info">
                                     <h2>Title Default</h2>
                                     <div className="post-user">
                                         <div className="post-user-info">
                                             <div className="profile-img">
-                                                <img src="" alt="" />
+                                                <img src="#" alt="" />
                                             </div>
                                             <span>Username</span>
                                         </div>
@@ -65,14 +65,14 @@ const Community = () => {
                             </div>
                             <div className="post-pattern-multi-2">
                                 <div className="post-img">
-                                    <img src="" alt="" />
+                                    <img src="#" alt="" />
                                 </div>
                                 <div className="post-info">
                                     <h2>Title Default</h2>
                                     <div className="post-user">
                                         <div className="post-user-info">
                                             <div className="profile-img">
-                                                <img src="" alt="" />
+                                                <img src="#" alt="" />
                                             </div>
                                             <span>Username</span>
                                         </div>
@@ -95,7 +95,13 @@ const Community = () => {
 
                 </div>
                 <div className="post-tail">
-
+                    <h1>Trending Post</h1>
+                    <span>Journey within us with a spiritual touch</span>
+                    <div className="trending-post">
+                        <div className="default-load">
+                            <img src="default-Search.png" alt="load" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
