@@ -10,7 +10,7 @@ const Navbar1 = () => {
               <div className="logo-img">
                   <img src="/mount-w.png" alt="" />
               </div>
-              <span>Trekya</span>
+              <span>Trekya</span> 
           </div>
         </Link>
         <div className="nav-links">

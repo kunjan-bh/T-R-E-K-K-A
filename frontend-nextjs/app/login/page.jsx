@@ -20,8 +20,9 @@ const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    full_name: '',
     rememberMe: false,
-    isFromNepal: false,
+    is_from_nepal: false,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -40,6 +41,14 @@ const Login = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
+    let firstName = '';
+    let lastName = '';
+
+    if (!isLogin && formData.full_name) {
+      const nameParts = formData.full_name.trim().split(' ');
+      firstName = nameParts[0];
+      lastName = nameParts.slice(1).join(' '); // Everything else as last name
+    }
 
     try {
       if (isLogin) {
@@ -56,7 +65,8 @@ const Login = () => {
         const response = await signup(
           formData.email,
           formData.password,
-          formData.isFromNepal
+          formData.full_name,
+          formData.is_from_nepal
         );
         console.log('Signup successful:', response);
         setIsLogin(true);
@@ -138,6 +148,31 @@ const Login = () => {
 
           {/* Form */}
           <form className="form" onSubmit={handleSubmit}>
+            <div className={isLogin ? "hide" : "flex-column"}>
+              <label>Full Name </label>
+            </div>
+            <div className={isLogin ? "hide" : "inputForm"}>
+              {isLogin ? (
+                <input
+                name="full_name"
+                placeholder="Enter your Full Name"
+                className="input"
+                type="text"
+                value={formData.full_name}
+                onChange={handleChange}
+              />
+              ) : (
+                <input
+                name="full_name"
+                placeholder="Enter your Full Name"
+                className="input"
+                type="text"
+                value={formData.full_name}
+                onChange={handleChange}
+                required
+              />
+              )}
+            </div>
             <div className="flex-column">
               <label>Email </label>
             </div>
@@ -198,12 +233,12 @@ const Login = () => {
               <div className='check-btn'>
                 <input
                   type="checkbox"
-                  id="isFromNepal"
-                  name="isFromNepal"
-                  checked={formData.isFromNepal}
+                  id="is_from_nepal"
+                  name="is_from_nepal"
+                  checked={formData.is_from_nepal}
                   onChange={handleChange}
                 />
-                <label htmlFor="isFromNepal">I am from Nepal.</label>
+                <label htmlFor="is_from_nepal">I am from Nepal.</label>
               </div>
             </div>
 

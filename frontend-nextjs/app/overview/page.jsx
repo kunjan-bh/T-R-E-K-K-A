@@ -2,7 +2,7 @@
 import ProfileBtn from "@/components/ProfileBtn";
 import Notify from "@/components/Notify";
 
-const Overview = () => {
+const Overview = ({ user_id }) => {
     return (
         <div className="selective-content">
           <div className="dasNav">
@@ -16,7 +16,7 @@ const Overview = () => {
             </div>
             <div className="userInfo">
               <Notify></Notify>
-              <ProfileBtn></ProfileBtn>
+              <ProfileBtn ></ProfileBtn>
             </div>
             
           </div>

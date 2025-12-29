@@ -1,7 +1,7 @@
 "use client";
 import Notify from "@/components/Notify";
 import ProfileBtn from "@/components/ProfileBtn";
-const Community = () => {
+const Community = ({ user_id }) => {
     return (
         <div className="community-content">
             <div className="selective-content">

@@ -9,8 +9,10 @@ import Notify from '@/components/Notify';
 import Overview from '../overview/page';
 import TravelKit from '../travelKit/page';
 import Community from '../community/page';
+import { getCurrentUser, isAuthenticated } from '@/lib/api';
 
 const Dashboard = () => {
+
   const router = useRouter();
   const [showOverview, setShowOverview] = useState(true);
   const [showTravelKit, setShowTravelKit] = useState(false);
@@ -23,7 +25,7 @@ const Dashboard = () => {
     setShowTravelKit(false);
     setShowCommunity(false);
   }
-  
+
   const handleTravelKit = () => {
     setShowOverview(false);
     setShowTravelKit(true);
@@ -42,35 +44,36 @@ const Dashboard = () => {
         router.push('/login');
         return;
       }
-
+      console.log('User datas:');
       try {
         if (typeof getCurrentUser !== 'undefined') {
-            const userData = await getCurrentUser();
-            setUser(userData);
-            console.log('User data:', userData);
+          const userData = await getCurrentUser();
+          setUser(userData);
+          console.log('User datas:', userData.id);
         }
       } catch (error) {
         console.error('Failed to get user:', error);
         router.push('/login');
       } finally {
         setLoading(false);
+        console.log('Loading:', loading);
       }
     };
-    
+
     checkAuth();
   }, [router]);
 
   if (loading) {
-      return <div>Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
     <div className='dashboard-content'>
-        <SideNav handleOverview={handleOverview} handleTravelKit={handleTravelKit} handleCommunity={handleCommunity}></SideNav>
-        {showOverview && <Overview></Overview>}
-        {showTravelKit && <TravelKit></TravelKit>}
-        {showCommunity && <Community></Community>}
-      </div>
+      <SideNav handleOverview={handleOverview} handleTravelKit={handleTravelKit} handleCommunity={handleCommunity}></SideNav>
+      {showOverview && <Overview user_id={user.id}></Overview>}
+      {showTravelKit && <TravelKit user_id={user.id}></TravelKit>}
+      {showCommunity && <Community user_id={user.id}></Community>}
+    </div>
   )
 }
 

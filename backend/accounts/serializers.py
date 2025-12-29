@@ -20,53 +20,42 @@ class RegisterSerializer(serializers.ModelSerializer):
     """
     Serializer for user registration (for our custom endpoint)
     """
-
     email = serializers.EmailField(
-        required = True,
+        required=True,
         validators=[UniqueValidator(queryset=User.objects.all(), message="This email is already registered")]
     )
     password = serializers.CharField(
         write_only=True,
         required=True,
         validators=[validate_password],
-        style={'input_type':'password'}
+        style={'input_type': 'password'}
     )
-    password2 = serializers.CharField(
-        write_only=True,
-        required=True,
-        style={'input_type':'password'}
-    )
+    full_name = serializers.CharField(required=True, write_only=True)  # <-- add this
     is_from_nepal = serializers.BooleanField(required=False, default=False)
 
     class Meta:
         model = User
-        fields = ('email','password','password2','first_name','last_name','is_from_nepal')
-        extra_kwargs = {
-            'first_name':{'required':False},
-            'last_name':{'required':False}
-        }
+        fields = ('email', 'password', 'full_name', 'is_from_nepal')
 
-    def validate(self,attrs):
-        """
-        Check that the two password entries match
-        """
-        if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError({"password2":"Password fields didn't match."})
-        return attrs
-    
     def create(self, validated_data):
-        """
-        Create and return a new user instance
-        """
-        validated_data.pop('password2')
+        # 1. Extract full_name safely
+        full_name = validated_data.pop('full_name')
+
+        # 2. Split into first and last name
+        name_parts = full_name.strip().split()
+        first_name = name_parts[0] if len(name_parts) > 0 else ''
+        last_name = ' '.join(name_parts[1:]) if len(name_parts) > 1 else ''
+
+        # 3. Create user
         user = User.objects.create_user(
             email=validated_data['email'],
             password=validated_data['password'],
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', ''),
+            first_name=first_name,
+            last_name=last_name,
             is_from_nepal=validated_data.get('is_from_nepal', False)
         )
         return user
+
 
 
 class CustomRegisterSerializer(BaseRegisterSerializer):

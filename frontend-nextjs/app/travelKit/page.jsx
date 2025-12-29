@@ -2,7 +2,7 @@
 import Notify from "@/components/Notify";
 import ProfileBtn from "@/components/ProfileBtn"; 
 
-const TravelKit = () => {
+const TravelKit = ({ user_id }) => {
     return (
         <div className='travelKit-content'>
             <div className="selective-content">

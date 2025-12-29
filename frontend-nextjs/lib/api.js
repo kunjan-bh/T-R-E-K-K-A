@@ -44,29 +44,34 @@ export function isAuthenticated() {
 }
 
 // Signup function
-export async function signup(email, password, isFromNepal = false) {
+// Signup function
+export async function signup(email, password, full_name, is_from_nepal = false) {
   try {
     const response = await fetch(`${API_URL}/signup/`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        password2: password,
-        is_from_nepal: isFromNepal,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password, full_name, is_from_nepal }),
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || JSON.stringify(data));
+    const text = await response.text(); // read body once
+    let data;
+    try {
+      data = JSON.parse(text); // try parsing JSON
+    } catch (err) {
+      console.error('Server returned non-JSON:', text);
+      throw new Error('Server returned invalid JSON');
     }
 
-    // Auto-login after signup - store tokens
-    storeTokens(data.tokens, true);
+    if (!response.ok) {
+      if (typeof data === 'object') {
+        const key = Object.keys(data)[0];
+        throw new Error(data[key][0]);
+      }
+      throw new Error('Signup failed');
+    }
+
+    // Store tokens if present
+    if (data.tokens) storeTokens(data.tokens, true);
 
     return data;
   } catch (error) {
@@ -74,6 +79,9 @@ export async function signup(email, password, isFromNepal = false) {
     throw error;
   }
 }
+
+
+
 
 // Login function
 export async function login(email, password, rememberMe = false) {
@@ -133,32 +141,17 @@ export async function logout() {
 
 // Get current user
 export async function getCurrentUser() {
-  try {
-    const tokens = getTokens();
-    
-    if (!tokens.access) {
-      throw new Error('No access token');
-    }
+  const response = await fetchWithAuth(`${API_URL}/user/`, {
+    method: 'GET',
+  });
 
-    const response = await fetch(`${API_URL}/user/`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${tokens.access}`,
-      },
-    });
+  const data = await response.json();
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Failed to get user');
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Get user error:', error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to get user');
   }
+
+  return data;
 }
 
 // Refresh access token
@@ -200,4 +193,42 @@ export async function refreshAccessToken() {
     clearTokens();
     throw error;
   }
+}
+
+async function fetchWithAuth(url, options = {}) {
+  const tokens = getTokens();
+
+  if (!tokens?.access) {
+    throw new Error("No access token");
+  }
+
+  let response = await fetch(url, {
+    ...options,
+    headers: {
+      ...options.headers,
+      'Authorization': `Bearer ${tokens.access}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  //  If access token expired → refresh & retry ONCE
+  if (response.status === 401) {
+    try {
+      const newAccess = await refreshAccessToken();
+
+      response = await fetch(url, {
+        ...options,
+        headers: {
+          ...options.headers,
+          'Authorization': `Bearer ${newAccess}`,
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (err) {
+      clearTokens();
+      throw new Error("Session expired");
+    }
+  }
+
+  return response;
 }
