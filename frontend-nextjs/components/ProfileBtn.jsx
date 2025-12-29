@@ -1,7 +1,16 @@
 "use client";
+import { logout } from "@/lib/api";
+import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
 
 const ProfileBtn = () => {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await logout();           //clear token
+    router.push("/login");    // redirect user
+  };
+
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -35,7 +44,7 @@ const ProfileBtn = () => {
 
       {open && (
         <div
-          className="overlay-profile absolute right-0 mt-1 w-48 bg-white shadow-lg rounded-xl border border-gray-100 p-3 animate-fadeIn"
+          className="profileBtns overlay-profile absolute right-0 mt-1 w-48 bg-white shadow-lg rounded-xl border border-gray-100 p-3 animate-fadeIn"
         >
             <button className="overlay-profile-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-black">
                 My Profile
@@ -43,7 +52,7 @@ const ProfileBtn = () => {
             <button className="overlay-profile-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-black">
                 Settings
             </button>
-            <button className="overlay-profile-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-red-500">
+            <button onClick={handleLogout} className="overlay-profile-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-red-500">
                 Logout
             </button>
 

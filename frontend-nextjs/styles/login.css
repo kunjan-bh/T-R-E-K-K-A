@@ -412,6 +412,18 @@ span.tag{
 .button-submit:active {
   translate: 0 0.225em;
 }
+.error-msg{
+    color: rgb(255, 0, 0);
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    /* border: 1px solid rgb(255, 0, 0); */
+    min-width: 20vw;
+    background-color: rgba(249, 72, 72, 0.3);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-top: 10px;
+}
 
 
 

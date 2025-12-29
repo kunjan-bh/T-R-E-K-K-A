@@ -1,8 +1,16 @@
 import React from 'react'
 import PageTransition from "./PageTransition";
 import Link from 'next/link'
+import { logout } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const SideNav = ({ handleOverview, handleTravelKit, handleCommunity }) => {
+    const router = useRouter();
+
+    const handleLogout = async () => {
+    await logout();           //clear token
+    router.push("/login");    // redirect user
+    };
   return (
     <div className="column-nav">
         <div className="logo">
@@ -110,7 +118,7 @@ const SideNav = ({ handleOverview, handleTravelKit, handleCommunity }) => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="">
+                    <Link href="" onClick={handleLogout}>
                         <div className='nav-div'>
                             <div className="nav-icon">
                                 <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

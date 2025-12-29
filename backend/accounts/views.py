@@ -43,51 +43,50 @@ class RegisterView(generics.CreateAPIView):
 
 
 class LoginView(APIView):
-    """
-    API endpoint for user login
-    POST /api/auth/login/
-    """
     permission_classes = (AllowAny,)
     serializer_class = LoginSerializer
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        
+
         email = serializer.validated_data['email']
         password = serializer.validated_data['password']
         remember_me = serializer.validated_data.get('remember_me', False)
-        
-        # Authenticate user
+
         user = authenticate(request, email=email, password=password)
-        
-        if user is not None:
-            if not user.is_active:
-                return Response({
-                    'error': 'This account has been disabled.'
-                }, status=status.HTTP_403_FORBIDDEN)
-            
-            # Generate tokens
-            refresh = RefreshToken.for_user(user)
-            
-            # Adjust token lifetime based on "remember me"
-            if remember_me:
-                refresh.set_exp(lifetime=timedelta(days=30))
-            else:
-                refresh.set_exp(lifetime=timedelta(days=1))
-            
-            return Response({
-                'user': UserSerializer(user).data,
-                'tokens': {
-                    'refresh': str(refresh),
-                    'access': str(refresh.access_token),
-                },
-                'message': 'Login successful'
-            }, status=status.HTTP_200_OK)
+
+        if not user:
+            return Response(
+                {'error': 'Invalid email or password'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        if not user.is_active:
+            return Response(
+                {'error': 'This account has been disabled.'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        refresh = RefreshToken.for_user(user)
+
+        # Set refresh expiry FIRST
+        if remember_me:
+            refresh.set_exp(lifetime=timedelta(days=30))
         else:
-            return Response({
-                'error': 'Invalid email or password'
-            }, status=status.HTTP_401_UNAUTHORIZED)
+            refresh.set_exp(lifetime=timedelta(days=1))
+
+        access = refresh.access_token  # now derived correctly
+
+        return Response({
+            'user': UserSerializer(user).data,
+            'tokens': {
+                'refresh': str(refresh),
+                'access': str(access),
+            },
+            'message': 'Login successful'
+        }, status=status.HTTP_200_OK)
+
 
 
 class LogoutView(APIView):

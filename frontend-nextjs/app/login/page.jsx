@@ -1,11 +1,21 @@
 "use client";
 import PageTransition from '@/components/PageTransition';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login, signup } from '@/lib/api';
 
 const Login = () => {
+  useEffect(() => {
+    const access =
+      localStorage.getItem("access_token") ||
+      sessionStorage.getItem("access_token");
+
+    if (access) {
+      router.push("/dashboard");
+    }
+  }, []);
+
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -121,7 +131,7 @@ const Login = () => {
 
           {/* Error Message */}
           {error && (
-            <div style={{ color: 'red', marginBottom: '10px', textAlign: 'center' }}>
+            <div className='error-msg'>
               {error}
             </div>
           )}
