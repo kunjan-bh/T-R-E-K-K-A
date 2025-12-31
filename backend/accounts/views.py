@@ -164,6 +164,12 @@ def send_otp(request):
     otp = str(random.randint(100000, 999999))
     otp_store[email] = otp
 
+    if User.objects.filter(email=email).exists():
+        return Response(
+            {"success": False, "message": "Account already exists"},
+            status=409
+        )
+
     # Send OTP via email
     send_mail(
         subject='Your OTP for Trekya',
