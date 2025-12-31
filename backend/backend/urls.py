@@ -9,4 +9,5 @@ urlpatterns = [
     
     # Social authentication endpoints (Google, Facebook OAuth callbacks)
     path('accounts/', include('allauth.urls')),
+    path('api/',include('chatbot.urls')),
 ]

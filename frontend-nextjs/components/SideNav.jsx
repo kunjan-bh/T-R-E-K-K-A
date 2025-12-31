@@ -42,7 +42,7 @@ const SideNav = ({ handleOverview, handleTravelKit, handleCommunity }) => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="">
+                    <Link href="/chat">
                         <div className='nav-div'>
                             <div className="nav-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-white">
