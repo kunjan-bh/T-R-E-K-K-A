@@ -54,7 +54,7 @@ const Login = () => {
       const res = await fetch(`${API_URL}/verify-otp/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: emailForOtp, otp }),
+        body: JSON.stringify({ email: emailForOtp, otp, purpose: "register" }),
       });
       const data = await res.json();
 

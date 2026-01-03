@@ -41,7 +41,7 @@ const ForgotPassword = ({ onClose }) => {
       const res = await fetch(`${API_URL}/verify-otp/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, otp }),
+        body: JSON.stringify({ email, otp, purpose: "resetReq" }),
       });
       const data = await res.json();
       if (data.success) {

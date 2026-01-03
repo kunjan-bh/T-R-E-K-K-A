@@ -261,33 +261,55 @@ def send_otpV2(request):#for forget password
 def verify_otp(request):
     email = request.data.get('email')
     otp = request.data.get('otp')
+    purpose = request.data.get('purpose')
 
     if not email or not otp:
         return Response({"success": False, "message": "Email and OTP are required"}, status=400)
+    if purpose == "resetReq":
+        record = otp_store.get(email)
 
-    record = otp_store.get(email)
-
-    if (
-        not record or
-        record["otp"] != otp or
-        record["expires_at"] < timezone.now()
-    ):
-        return Response(
-            {"success": False, "message": "Invalid or expired OTP"},
-            status=400
-        )
+        if (
+            not record or
+            record["otp"] != otp or
+            record["expires_at"] < timezone.now()
+        ):
+            return Response(
+                {"success": False, "message": "Invalid or expired OTP"},
+                status=400
+            )
 
     # OTP is valid → remove it (one-time use)
-    del otp_store[email]
+        del otp_store[email]
 
-    reset_token = str(uuid.uuid4())
-    reset_token_store[reset_token] = {
-            "email": email,
-            "expires_at": timezone.now() + timedelta(minutes=10)
-        }
+        reset_token = str(uuid.uuid4())
+        reset_token_store[reset_token] = {
+                "email": email,
+                "expires_at": timezone.now() + timedelta(minutes=10)
+            }
 
-    return Response({
-            "success": True,
-            "reset_token": reset_token,
-            "message": "OTP verified successfully"
-    })
+        return Response({
+                "success": True,
+                "reset_token": reset_token,
+                "message": "OTP verified successfully"
+        })
+    elif purpose == "register":
+        record = otp_store.get(email)
+        if (
+            not record or
+            record != otp 
+        ):
+            return Response(
+                {"success": False, "message": "Invalid or expired OTP"},
+                status=400
+            )
+
+        del otp_store[email]
+        return Response({
+                "success": True,
+                "message": "OTP verified successfully"
+        })
+    else:
+        return Response({
+                "success": False,
+                "message": "Invalid purpose"
+        })
