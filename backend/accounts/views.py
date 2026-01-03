@@ -14,6 +14,8 @@ from .serializers import (
     UserSerializer,
     ResetPasswordSerializer
 )
+import uuid
+from django.utils import timezone
 # views.py
 from rest_framework.decorators import api_view, permission_classes
 import random
@@ -154,11 +156,30 @@ def reset_password(request):
 
     try:
         data = json.loads(request.body)
-        email = data.get("email")
+        # email = data.get("email")
+        reset_token = data.get("reset_token")
         new_password = data.get("new_password")
 
-        if not email or not new_password:
-            return JsonResponse({"error": "Email and new password are required"}, status=400)
+        if not reset_token or not new_password:
+            return JsonResponse({"error": "Reset token and new password are required"}, status=400)
+        
+        record = reset_token_store.get(reset_token)
+        
+        if not record:
+            return JsonResponse(
+                {"error": "OTP verification required"},
+                status=403
+            )
+        
+        if record["expires_at"] < timezone.now():
+            del reset_token_store[reset_token]
+            return JsonResponse(
+                {"error": "Reset token expired"},
+                status=403
+            )
+
+        email = record["email"]
+        del reset_token_store[reset_token]  # one-time use
 
         try:
             user = User.objects.get(email=email)
@@ -178,6 +199,7 @@ def reset_password(request):
 
 
 otp_store = {}
+reset_token_store = {}
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -215,7 +237,10 @@ def send_otpV2(request):#for forget password
         return Response({"success": False, "message": "Email is required"}, status=400)
 
     otp = str(random.randint(100000, 999999))
-    otp_store[email] = otp
+    otp_store[email] = {
+        "otp": otp,
+        "expires_at": timezone.now() + timedelta(minutes=5)
+    }
 
 
 
@@ -240,9 +265,29 @@ def verify_otp(request):
     if not email or not otp:
         return Response({"success": False, "message": "Email and OTP are required"}, status=400)
 
-    # Verify OTP
-    if email in otp_store and otp_store[email] == otp:
-        del otp_store[email]  # remove OTP after verification
-        return Response({"success": True, "message": "OTP verified"})
-    else:
-        return Response({"success": False, "message": "Invalid or expired OTP"}, status=400)
+    record = otp_store.get(email)
+
+    if (
+        not record or
+        record["otp"] != otp or
+        record["expires_at"] < timezone.now()
+    ):
+        return Response(
+            {"success": False, "message": "Invalid or expired OTP"},
+            status=400
+        )
+
+    # OTP is valid → remove it (one-time use)
+    del otp_store[email]
+
+    reset_token = str(uuid.uuid4())
+    reset_token_store[reset_token] = {
+            "email": email,
+            "expires_at": timezone.now() + timedelta(minutes=10)
+        }
+
+    return Response({
+            "success": True,
+            "reset_token": reset_token,
+            "message": "OTP verified successfully"
+    })

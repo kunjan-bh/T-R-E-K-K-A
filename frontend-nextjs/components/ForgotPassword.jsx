@@ -10,6 +10,7 @@ const ForgotPassword = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [resetToken, setResetToken] = useState('');
 
   const sendOtp = async () => {
     setLoading(true);
@@ -45,6 +46,7 @@ const ForgotPassword = ({ onClose }) => {
       const data = await res.json();
       if (data.success) {
         setStep('reset-password');
+        setResetToken(data.reset_token);
       } else {
         setError('Invalid or expired OTP');
       }
@@ -62,12 +64,16 @@ const ForgotPassword = ({ onClose }) => {
       const res = await fetch(`${API_URL}/reset-password/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, otp, new_password: newPassword }),
+        body: JSON.stringify({ new_password: newPassword, resetToken }),
       });
       const data = await res.json();
       if (res.ok) {
         setSuccess('Password reset successfully! You can login now.');
         setStep('enter-email');
+        setEmail('');
+        setOtp('');
+        setNewPassword('');
+        setResetToken('');
       } else {
         setError(data.error || 'Failed to reset password');
       }
