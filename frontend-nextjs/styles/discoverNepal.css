@@ -1,8 +1,20 @@
 .mapAnimation {
   width: 100%;
   height: 100vh;
-  background: #f0f4f8;
+  background-image: url('/bg-map.jpg');
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 1);
+  background-size: cover;
+  background-position: center;
+  
   overflow: hidden;
+}
+.mapAnimation .dasNav {
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+}
+.mapAnimation .dasNav h1 {
+  color: white;
 }
 
 .map-container {
@@ -19,26 +31,42 @@
   cursor: pointer;
 }
 
-.koshi { fill: #0B1F3A; }
-.koshi:hover { fill: #1C3D73; }
+.koshi { fill: #0f2a4d; opacity: 0.7; }
+.koshi:hover { fill: #1C3D73; opacity: 1; }
 
-.madheshi { fill: #0F2A4F; }
-.madheshi:hover { fill: #245A9A; }
+.madheshi { fill: #0F2A4F; opacity: 0.7; }
+.madheshi:hover { fill: #245A9A; opacity: 1; }
 
-.bagmati { fill: #163A6B; }
-.bagmati:hover { fill: #2F6DB3; }
+.bagmati { fill: #163A6B; opacity: 0.7; }
+.bagmati:hover { fill: #2F6DB3; opacity: 1; }
 
-.gandaki { fill: #1E4A87; }
-.gandaki:hover { fill: #4A86C8; }
+.gandaki { fill: #1E4A87; opacity: 0.7; }
+.gandaki:hover { fill: #4A86C8; opacity: 1; }
 
-.lumbini { fill: #2A63A8; }
-.lumbini:hover { fill: #6FA0D9; }
+.lumbini { fill: #2A63A8; opacity: 0.7; }
+.lumbini:hover { fill: #6FA0D9; opacity: 1; }
 
-.karnali { fill: #3C7BC3; }
-.karnali:hover { fill: #8FB6E8; }
+.karnali { fill: #3C7BC3; opacity: 0.7; }
+.karnali:hover { fill: #8FB6E8; opacity: 1; }
 
-.sudurpaschim { fill: #5A96D6; }
-.sudurpaschim:hover { fill: #B3D1F2; }
+.sudurpaschim { fill: #5A96D6; opacity: 0.7; }
+.sudurpaschim:hover { fill: #B3D1F2; opacity: 1; }
+/* Base province styles - UPDATED WITH BORDERS */
+.province {
+  transition: fill 0.4s ease, opacity 0.4s ease, stroke-width 0.3s ease;
+  cursor: pointer;
+  stroke: #ffffff;           /* White border - stands out on any green */
+  stroke-width: 1;           /* Thickness of the border */
+  stroke-linejoin: round;    /* Smooth corners at province junctions */
+  fill-rule: evenodd;        /* Helps with complex paths */
+}
+
+.province.active {
+  fill: #1C3D73;
+}
+.province.inactive {
+  display: none;
+}
 
 .custom-tooltip {
   background: rgba(15, 23, 42, 0.95);
@@ -65,6 +93,53 @@
   margin-left: -8px;
   border: 8px solid transparent;
   border-top-color: rgba(15, 23, 42, 0.95);
+}
+.back-btn {
+ position: absolute;
+ bottom: 20px;
+ right: 20px;
+}
+.back-btn button {
+ display: flex;
+ height: 3em;
+ width: 100px;
+ align-items: center;
+ justify-content: center;
+ background-color: #eeeeee4b;
+ border-radius: 3px;
+ letter-spacing: 1px;
+ transition: all 0.2s linear;
+ cursor: pointer;
+ border: none;
+ background: transparent;
+ backdrop-filter: blur(10px);
+ color: white;
+ border: 1px solid #fff;
+ border-radius: 10px;
+}
+
+.back-btn button > svg {
+ margin-right: 5px;
+ margin-left: 5px;
+ font-size: 20px;
+ transition: all 0.4s ease-in;
+}
+
+.back-btn button:hover > svg {
+ font-size: 1.2em;
+ transform: translateX(-5px);
+}
+.back-btn button> svg path{
+fill: #fff;
+}
+
+.back-btn button:hover {
+ background-color: transparent;
+ border: none;
+ border-bottom: 1px solid #fff;
+ border-radius: 0px;
+ color: #fff;
+ transform: translateY(-2px);
 }
 
 @keyframes fadeInMap {
