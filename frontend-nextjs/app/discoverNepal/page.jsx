@@ -164,45 +164,38 @@ const DiscoverNepal = () => {
                                     href="/mountain.svg"
                                     preserveAspectRatio="xMidYMid meet"
                                 />
-
                                 <text x="820" y="520" textAnchor="middle" className="place-text">
                                     Everest Region
                                 </text>
-
                             </g>
                             <g className={province === 'koshi' ? "koshi-place-group p2" : "hide"}>
                                 <image
-                                    href="/leaf.svg"  
+                                    href="/leaf.svg"
                                     preserveAspectRatio="xMidYMid meet"
                                 />
-
                                 <text x="820" y="520" textAnchor="middle" className="place-text">
                                     Ilam
                                 </text>
-
                             </g>
                             <g className={province === 'koshi' ? "koshi-place-group p3" : "hide"}>
                                 <image
                                     href="/tree.svg"
                                     preserveAspectRatio="xMidYMid meet"
                                 />
-
                                 <text x="820" y="520" textAnchor="middle" className="place-text">
                                     Koshi Tappu
                                 </text>
-
                             </g>
                             <g className={province === 'koshi' ? "koshi-place-group p4" : "hide"}>
                                 <image
                                     href="/city.svg"
                                     preserveAspectRatio="xMidYMid meet"
                                 />
-
                                 <text x="820" y="520" textAnchor="middle" className="place-text">
                                     Dharan
                                 </text>
-
                             </g>
+
                             <path
                                 className={province === 'gandaki' ? "province gandaki active" : (province === '' ? "province gandaki" : "province gandaki inactive")}
                                 onClick={() => setProvince('gandaki')}
@@ -347,6 +340,61 @@ const DiscoverNepal = () => {
                 c2.467,7.899,13.686,6.317,15.78,14.821c0.542,2.202,3.818,3.043,5.876,1.801c7.049-4.257,8.107,2.197,8.169,5.565
                 c0.104,5.675,3.195,7.322,7.408,8.604c13.128,3.995,27.079,3.395,40.253,7.161c0,0,0,0,0,0
                 C1038.625,807.047,1037.731,802.409,1041.74,801.222z"/>
+                            <g className={province === 'bagmati' ? "bagmati-place-group p1" : "hide"}>
+                                <image
+                                    href="/city.svg"
+                                    preserveAspectRatio="xMidYMid meet"
+                                />
+                                <text x="820" y="520" textAnchor="middle" className="place-text">
+                                    Kathmandu
+                                </text>
+                            </g>
+                            <g className={province === 'bagmati' ? "bagmati-place-group p2" : "hide"}>
+                                <image
+                                    href="/tree.svg"
+                                    preserveAspectRatio="xMidYMid meet"
+                                />
+                                <text x="820" y="520" textAnchor="middle" className="place-text">
+                                    Langtang National Park
+                                </text>
+                            </g>
+                            <g className={province === 'bagmati' ? "bagmati-place-group p3" : "hide"}>
+                                <image
+                                    href="/lake.svg"
+                                    preserveAspectRatio="xMidYMid meet"
+                                />
+                                <text x="820" y="520" textAnchor="middle" className="place-text">
+                                    Gosaikunda Lake
+                                </text>
+                            </g>
+                            <g className={province === 'bagmati' ? "bagmati-place-group p4" : "hide"}>
+                                <image
+                                    href="/city.svg"
+                                    preserveAspectRatio="xMidYMid meet"
+                                />
+                                <text x="820" y="520" textAnchor="middle" className="place-text">
+                                    Bhaktapur
+                                </text>
+                            </g>
+                            <g className={province === 'bagmati' ? "bagmati-place-group p5" : "hide"}>
+                                <image
+                                    href="/city.svg"
+                                    preserveAspectRatio="xMidYMid meet"
+                                />
+                                <text x="820" y="520" textAnchor="middle" className="place-text">
+                                    Lalitpur
+                                </text>
+                            </g>
+                            <g className={province === 'bagmati' ? "bagmati-place-group p6" : "hide"}>
+                                <image
+                                    href="/mountain.svg"
+                                    preserveAspectRatio="xMidYMid meet"
+                                />
+                                <text x="820" y="520" textAnchor="middle" className="place-text">
+                                    Gaurishankar Mountain
+                                </text>
+                            </g>
+                            
                             <path className="st4" d="M962.312,753.651c-3.344,2.036-7.179,3.927-10.672,5.379C955.952,758.662,959.323,756.572,962.312,753.651z"
                             />
                             <path
@@ -443,6 +491,15 @@ const DiscoverNepal = () => {
                 c0.097,0.328,0.855,0.457,1.303,0.682c10.749,5.385,21.601,10.579,32.2,16.245c4.679,2.501,8.493,3.398,11.474-1.935
                 c1.228-2.198,3.413-3.046,5.059-1.944c6.951,4.651,11.826-0.039,17.733-2.657c6.144-2.723,8.247-8.183,11.84-12.713
                 C1577.522,1017.077,1578.791,1011.219,1586.969,1008.333z"/>
+                            <g className={province === 'madheshi' ? "madheshi-place-group p1" : "hide"}>
+                                <image
+                                    href="/temple.svg"
+                                    preserveAspectRatio="xMidYMid meet"
+                                />
+                                <text x="820" y="520" textAnchor="middle" className="place-text">
+                                    Janaki Mandir
+                                </text>
+                            </g>
                         </g>
                     </g>
                     <g>

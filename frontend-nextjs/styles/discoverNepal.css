@@ -276,50 +276,97 @@
 }
 
 
-.koshi-btn {
-  position: absolute;
-  top: 160px;
-  left: 180px;
-  display: flex;
-  gap: 8px;
-}
 
 
-.koshi-place-group circle {
-  fill: #ff6b35;
-}
 
-.koshi-place-group:hover circle {
-  fill: #ff9f1c;
-}
 .koshi-place-group.p1 {
   transform: translate(-300px, -350px);
 }
-.koshi-place-group.p1:hover{
-  transform: translate(-300px, -350px) scale(1.2) ;
+
+.koshi-place-group.p1:hover {
+  transform: translate(-300px, -350px) scale(1.2);
 }
 
 .koshi-place-group.p2 {
   transform: translate(330px, 250px);
 }
-.koshi-place-group.p2:hover{
-  transform: translate(330px, 250px) scale(1.2) ;
+
+.koshi-place-group.p2:hover {
+  transform: translate(330px, 250px) scale(1.2);
 }
 
 .koshi-place-group.p3 {
   transform: translate(-100px, 400px);
 }
-.koshi-place-group.p3:hover{
-  transform: translate(-100px, 400px) scale(1.2) ;
+
+.koshi-place-group.p3:hover {
+  transform: translate(-100px, 400px) scale(1.2);
 }
 
 .koshi-place-group.p4 {
   transform: translate(10px, 200px);
 }
-.koshi-place-group.p4:hover{
-  transform: translate(10px, 200px) scale(1.2) ;
+
+.koshi-place-group.p4:hover {
+  transform: translate(10px, 200px) scale(1.2);
 }
-.koshi-place-group image {
+
+.madheshi-place-group.p1 {
+  transform: translate(150px, 160px);
+}
+
+.madheshi-place-group.p1:hover {
+  transform: translate(150px, 160px) scale(1.2);
+}
+
+.bagmati-place-group.p1 {
+  transform: translate(10px, 30px);
+}
+
+.bagmati-place-group.p1:hover {
+  transform: translate(10px, 30px) scale(1.2);
+}
+.bagmati-place-group.p2 {
+  transform: translate(50px, -150px);
+}
+
+.bagmati-place-group.p2:hover {
+  transform: translate(50px, -150px) scale(1.2);
+}
+.bagmati-place-group.p3 {
+  transform: translate(-100px, -100px);
+}
+
+.bagmati-place-group.p3:hover {
+  transform: translate(-100px, -100px) scale(1.2);
+}
+.bagmati-place-group.p4 {
+  transform: translate(120px, 40px);
+}
+
+.bagmati-place-group.p4:hover {
+  transform: translate(120px, 40px) scale(1.2);
+}
+.bagmati-place-group.p5 {
+  transform: translate(10px, 120px);
+}
+
+.bagmati-place-group.p5:hover {
+  transform: translate(10px, 120px) scale(1.2);
+}
+.bagmati-place-group.p6 {
+  transform: translate(600px, -70px);
+}
+
+.bagmati-place-group.p6:hover {
+  transform: translate(600px, -70px) scale(1.2);
+}
+
+
+
+.koshi-place-group image,
+.madheshi-place-group image,
+.bagmati-place-group image {
   width: 50px;
   height: 50px;
   x: 800;
@@ -327,7 +374,10 @@
 
   /* pointer-events: none; */
 }
-.koshi-place-group .place-text {
+
+.koshi-place-group .place-text,
+.madheshi-place-group .place-text,
+.bagmati-place-group .place-text {
 
   fill: #ffffff;
   font-size: 18px;
@@ -336,15 +386,23 @@
   /* pointer-events: none; */
 }
 
-.koshi-place-group {
-  transition: all 0.4s ease;
+.koshi-place-group,
+.madheshi-place-group,
+.bagmati-place-group {
+  transition: all 0.6s ease;
   cursor: pointer;
   z-index: 100000;
-}
-.koshi-place-group {
-  transition: all 0.4s ease;
-  transform-box: fill-box;       /* Reference box for transforms */
-  transform-origin: center;      /* Scale from element center */
-  /* transition: transform 0.3s ease; */
+  transform-box: fill-box;
+  /* Reference box for transforms */
+  transform-origin: center;
 }
 
+
+
+.province.madheshi.active {
+  fill: #d47b32;
+}
+
+.province.bagmati.active {
+  fill: #1c7347;
+}
