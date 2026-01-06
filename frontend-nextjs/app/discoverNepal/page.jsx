@@ -160,9 +160,8 @@ const DiscoverNepal = () => {
                 c1.466-4.13,4.344-7.852,4.318-12.506c-0.016-2.871,0.515-5.477,1.99-7.917c3.865-6.394,9.613-12.254,5.717-20.834
                 c-0.322-0.709,0.04-2.115,0.591-2.772C1865.543,684.296,1861.545,681.561,1856.507,678.228z"/>
                             <g className={province === 'koshi' ? "koshi-place-group p1" : "hide"}>
-                                <circle />
                                 <image
-                                    href="/bg-map.png"
+                                    href="/mountain.svg"
                                     preserveAspectRatio="xMidYMid meet"
                                 />
 
@@ -172,9 +171,8 @@ const DiscoverNepal = () => {
 
                             </g>
                             <g className={province === 'koshi' ? "koshi-place-group p2" : "hide"}>
-                                <circle />
                                 <image
-                                    href="/bg-map.png"  
+                                    href="/leaf.svg"  
                                     preserveAspectRatio="xMidYMid meet"
                                 />
 
@@ -184,9 +182,8 @@ const DiscoverNepal = () => {
 
                             </g>
                             <g className={province === 'koshi' ? "koshi-place-group p3" : "hide"}>
-                                <circle />
                                 <image
-                                    href="/bg-map.png"
+                                    href="/tree.svg"
                                     preserveAspectRatio="xMidYMid meet"
                                 />
 
@@ -196,9 +193,8 @@ const DiscoverNepal = () => {
 
                             </g>
                             <g className={province === 'koshi' ? "koshi-place-group p4" : "hide"}>
-                                <circle />
                                 <image
-                                    href="/bg-map.png"
+                                    href="/city.svg"
                                     preserveAspectRatio="xMidYMid meet"
                                 />
 

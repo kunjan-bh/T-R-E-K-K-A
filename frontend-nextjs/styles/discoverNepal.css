@@ -98,7 +98,7 @@
 }
 
 .province {
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   cursor: pointer;
   stroke: #ffffff;
   stroke-width: 1;
@@ -235,7 +235,7 @@
   margin-right: 5px;
   margin-left: 5px;
   font-size: 20px;
-  transition: all 0.4s ease-in;
+  transition: all 1s ease-in;
 }
 
 .back-btn button:hover>svg {
@@ -275,29 +275,6 @@
   text-align: center;
 }
 
-.places-menu {
-  position: absolute;
-  display: none;
-  gap: 6px;
-  padding: 10px;
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.places-menu button {
-  background: #1d4ed8;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 13px;
-}
-
-.places-menu button:hover {
-  background: #2563eb;
-}
 
 .koshi-btn {
   position: absolute;
@@ -306,10 +283,7 @@
   display: flex;
   gap: 8px;
 }
-.koshi-place-group {
-  cursor: pointer;
-  z-index: 100000;
-}
+
 
 .koshi-place-group circle {
   fill: #ff6b35;
@@ -321,32 +295,37 @@
 .koshi-place-group.p1 {
   transform: translate(-300px, -350px);
 }
+.koshi-place-group.p1:hover{
+  transform: translate(-300px, -350px) scale(1.2) ;
+}
 
 .koshi-place-group.p2 {
-  transform: translate(80px, -40px);
+  transform: translate(330px, 250px);
+}
+.koshi-place-group.p2:hover{
+  transform: translate(330px, 250px) scale(1.2) ;
 }
 
 .koshi-place-group.p3 {
-  transform: translate(-60px, 50px);
+  transform: translate(-100px, 400px);
+}
+.koshi-place-group.p3:hover{
+  transform: translate(-100px, 400px) scale(1.2) ;
 }
 
 .koshi-place-group.p4 {
-  transform: translate(40px, 90px);
+  transform: translate(10px, 200px);
 }
-.koshi-place-group circle {
-  cx: 820;
-  cy: 480;
-  r: 14;
-
-  fill: #ff6b35;
+.koshi-place-group.p4:hover{
+  transform: translate(10px, 200px) scale(1.2) ;
 }
 .koshi-place-group image {
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
   x: 800;
   y: 450;
 
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 .koshi-place-group .place-text {
 
@@ -354,6 +333,18 @@
   font-size: 18px;
   font-weight: 600;
 
-  pointer-events: none;
+  /* pointer-events: none; */
+}
+
+.koshi-place-group {
+  transition: all 0.4s ease;
+  cursor: pointer;
+  z-index: 100000;
+}
+.koshi-place-group {
+  transition: all 0.4s ease;
+  transform-box: fill-box;       /* Reference box for transforms */
+  transform-origin: center;      /* Scale from element center */
+  /* transition: transform 0.3s ease; */
 }
 
