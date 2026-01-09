@@ -13,6 +13,10 @@ import "./../styles/aboutus.css";
 import "./../styles/Loading.css";
 import "./../styles/ForgetPassword.css";
 import "./../styles/discoverNepal.css";
+import "./../styles/illam.css";
+import "./../styles/everestRegion.css";
+import "./../styles/koshiTappu.css";
+import "./../styles/dharan.css";
 
 import PageTransition from "@/components/PageTransition";
 

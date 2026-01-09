@@ -1,6 +1,6 @@
 .aboutus-content{
     width: 100%;
-    height: 300vh;
+    max-height: 350vh;
     background-image: url("/aboutus-back.png");
     background-size: cover;
     overflow-x: clip;
@@ -23,7 +23,6 @@
     width: 40%;
     height: 30vh;
     margin: auto;
-    /* background-color: #000000; */
     backdrop-filter: blur(10px);
     background-color: rgba(0, 0, 0, 0.1);
     color: #fff;

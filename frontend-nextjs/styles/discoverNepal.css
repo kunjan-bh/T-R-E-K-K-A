@@ -1,4 +1,5 @@
 .mapAnimation {
+  position: relative;
   width: 100%;
   height: 100vh;
   background-image: url('/bg-map.jpg');
@@ -108,6 +109,7 @@
   stroke-width: 1;
   stroke-linejoin: round;
   fill-rule: evenodd;
+  pointer-events: visiblePainted;
 }
 
 .province.gandaki.active {
