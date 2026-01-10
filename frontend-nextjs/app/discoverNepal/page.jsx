@@ -3,12 +3,18 @@ import { useState } from "react";
 import ProfileBtn from "@/components/ProfileBtn";
 import Notify from "@/components/Notify";
 import Illam from "@/components/Illam";
+import Dharan from "@/components/Dharan";
+import EverestRegion from "@/components/EverestRegion";
+import KoshiTappu from "@/components/KoshiTappu";
 
 const DiscoverNepal = () => {
 
     const [province, setProvince] = useState('');
     const [tooltip, setTooltip] = useState({ show: false, x: 0, y: 0, name: '' });
     const [illam, setIllam] = useState(false);
+    const [dharan, setDharan] = useState(false);
+    const [everestRegion, setEverestRegion] = useState(false);
+    const [koshiTappu, setKoshiTappu] = useState(false);
 
     const handleMouseMove = (e, name) => {
         setTooltip({
@@ -25,6 +31,15 @@ const DiscoverNepal = () => {
 
     const handleIllamState = () => {
         setIllam(false);
+    };
+    const handleDharanState = () => {
+        setDharan(false);
+    };
+    const handleEverestRegionState = () => {
+        setEverestRegion(false);
+    };
+    const handleKoshiTappuState = () => {
+        setKoshiTappu(false);
     };
     return (
         <>
@@ -195,7 +210,7 @@ const DiscoverNepal = () => {
                 c3.313-2.11,3.833-4.244,2.202-7.5c-3.287-6.559-4.859-11.848-2.33-20.578c3.388-11.691,11.561-20.04,15.435-30.953
                 c1.466-4.13,4.344-7.852,4.318-12.506c-0.016-2.871,0.515-5.477,1.99-7.917c3.865-6.394,9.613-12.254,5.717-20.834
                 c-0.322-0.709,0.04-2.115,0.591-2.772C1865.543,684.296,1861.545,681.561,1856.507,678.228z"/>
-                                <g className={province === 'koshi' ? "koshi-place-group p1" : "hide"}>
+                                <g className={province === 'koshi' ? "koshi-place-group p1" : "hide"} onClick={() => { setEverestRegion(true); console.log("everestRegion", everestRegion) }}>
                                     <image
                                         href="/mountain.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -220,7 +235,7 @@ const DiscoverNepal = () => {
 
                                 </g>
                                 {/* {illam && <Illam></Illam>} */}
-                                <g className={province === 'koshi' ? "koshi-place-group p3" : "hide"}>
+                                <g className={province === 'koshi' ? "koshi-place-group p3" : "hide"} onClick={() => { setKoshiTappu(true); console.log("koshiTappu", koshiTappu) }}>
                                     <image
                                         href="/tree.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -229,7 +244,7 @@ const DiscoverNepal = () => {
                                         Koshi Tappu
                                     </text>
                                 </g>
-                                <g className={province === 'koshi' ? "koshi-place-group p4" : "hide"}>
+                                <g className={province === 'koshi' ? "koshi-place-group p4" : "hide"} onClick={() => { setDharan(true); console.log("dharan", dharan) }}>
                                     <image
                                         href="/city.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -670,16 +685,10 @@ const DiscoverNepal = () => {
                         </g>
                     </svg>
                     {illam && <Illam handleIllamState={handleIllamState}></Illam>}
+                    {dharan && <Dharan handleDharanState={handleDharanState}></Dharan>}
+                    {everestRegion && <EverestRegion handleEverestRegionState={handleEverestRegionState}></EverestRegion>}
+                    {koshiTappu && <KoshiTappu handleKoshiTappuState={handleKoshiTappuState}></KoshiTappu>}
                 </div>
-                {/* {province === "koshi" && (
-                <div className="koshi-btn">
-                    <button>Dharan</button>
-                    <button>Itahari</button>
-                    <button>Biratnagar</button>
-                    <button>Ilam</button>
-                </div>
-            )} */}
-                {/* Custom Modern Tooltip */}
                 {tooltip.show && (
                     <div
                         className="custom-tooltip"
