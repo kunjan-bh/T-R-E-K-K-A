@@ -24,6 +24,8 @@ import Lumbini from "@/components/Lumbini";
 import Rara from "@/components/Rara";
 import Shey from "@/components/Shey";
 import SheyLake from "@/components/SheyLake";
+import Api from "@/components/Api";
+import Khaptad from "@/components/Khaptad";
 
 
 
@@ -54,6 +56,8 @@ const DiscoverNepal = () => {
     const [rara, setRara] = useState(false);
     const [shey, setShey] = useState(false);
     const [sheyLake, setSheyLake] = useState(false);
+    const [khaptad, setKhaptad] = useState(false);
+    const [api, setApi] = useState(false);
 
     const handleMouseMove = (e, name) => {
         setTooltip({
@@ -133,6 +137,12 @@ const DiscoverNepal = () => {
     };
     const handleSheyLakeState = () => {
         setSheyLake(false);
+    };
+    const handleKhaptadState = () => {
+        setKhaptad(false);
+    };
+    const handleApiState = () => {
+        setApi(false);
     };
     return (
         <>
@@ -500,7 +510,7 @@ const DiscoverNepal = () => {
                 c6.31-0.92,8.45,3.42,6.86,7.46c-2.5,6.37,0.83,16.47-10.22,18.25c-1.73,0.27-2.47,2.41-2.74,4.23
                 c-1.34,9.01-6.22,16.94-8.09,25.69c-1.95,9.09,2.67,22.6,16.61,20.79c3.99-0.52,5.48,1.58,6.39,4.72
                 c1.35,4.62,0.25,9.13-1.61,13.24C444.219,266.018,443.9,269.668,446.719,274.178z"/>
-                                <g className={province === 'sudurpaschim' ? "sudurpaschim-place-group p1" : "hide"}>
+                                <g className={province === 'sudurpaschim' ? "sudurpaschim-place-group p1" : "hide"} onClick={() => setKhaptad(true)}>
                                     <image
                                         href="/tree.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -509,7 +519,7 @@ const DiscoverNepal = () => {
                                         Khaptad National Park
                                     </text>
                                 </g>
-                                <g className={province === 'sudurpaschim' ? "sudurpaschim-place-group p2" : "hide"}>
+                                <g className={province === 'sudurpaschim' ? "sudurpaschim-place-group p2" : "hide"} onClick={() => setApi(true)}>
                                     <image
                                         href="/mountain.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -799,6 +809,8 @@ const DiscoverNepal = () => {
                     {shey && <Shey handleSheyState={handleSheyState}></Shey>}
                     {sheyLake && <SheyLake handleSheyLakeState={handleSheyLakeState}></SheyLake>}
                     {rara && <Rara handleRaraState={handleRaraState}></Rara>}
+                    {khaptad && <Khaptad handleKhaptadState={handleKhaptadState}></Khaptad>}
+                    {api && <Api handleApiState={handleApiState}></Api>}
                 </div>
                 {tooltip.show && (
                     <div

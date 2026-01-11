@@ -35,6 +35,8 @@ import "./../styles/lumbini.css"
 import "./../styles/sheyLake.css"
 import "./../styles/shey.css"
 import "./../styles/rara.css"
+import "./../styles/khaptad.css"
+import "./../styles/api.css"
 
 import PageTransition from "@/components/PageTransition";
 
