@@ -14,6 +14,13 @@ import Kathmandu from "@/components/Kathmandu";
 import Lalitpur from "@/components/Lalitpur";
 import LangtangNationalPark from "@/components/LangtangNationalPark";
 import Annapurna from "@/components/Annapurna";
+import Pokhara from "@/components/Pokhara";
+import Dhaulagiri from "@/components/Dhaulagiri";
+import Machhapuchhre from "@/components/Machhapuchhre";
+import Ghandruk from "@/components/Ghandruk";
+import Ghorepani from "@/components/Ghorepani";
+
+
 
 
 const DiscoverNepal = () => {
@@ -32,6 +39,11 @@ const DiscoverNepal = () => {
     const [lalitpur, setLalitpur] = useState(false);
     const [langtangNationalPark, setLangtangNationalPark] = useState(false);
     const [annapurna, setAnnapurna] = useState(false);
+    const [pokhara, setPokhara] = useState(false);
+    const [dhaulagiri, setDhaulagiri] = useState(false);
+    const [machhapuchhre, setMachhapuchhre] = useState(false);
+    const [ghandruk, setGhandruk] = useState(false);
+    const [ghorepani, setGhorepani] = useState(false);
 
     const handleMouseMove = (e, name) => {
         setTooltip({
@@ -81,6 +93,21 @@ const DiscoverNepal = () => {
     };
     const handleAnnapurnaState = () => {
         setAnnapurna(false);
+    };
+    const handlePokharaState = () => {
+        setPokhara(false);
+    };
+    const handleDhaulagiriState = () => {
+        setDhaulagiri(false);
+    };
+    const handleMachhapuchhreState = () => {
+        setMachhapuchhre(false);
+    };
+    const handleGhandrukState = () => {
+        setGhandruk(false);
+    };
+    const handleGhorepaniState = () => {
+        setGhorepani(false);
     };
     return (
         <>
@@ -351,7 +378,7 @@ const DiscoverNepal = () => {
                 c1.962,1.73,0.301,2.529-0.668,4.107c-2.9,4.728,0.505,14.094,5.603,16.738c-0.001,0-0.001,0.001-0.002,0.001
                 c0.001,0,0.001,0,0.002,0c0.949-0.596,1.898-1.191,2.846-1.787c0,0,0,0,0.001,0C919.927,783.95,923.086,780.441,920.986,775.732z"
                                 />
-                                <g className={province === 'gandaki' ? "gandaki-place-group p1" : "hide"}>
+                                <g className={province === 'gandaki' ? "gandaki-place-group p1" : "hide"} onClick={() => setGhandruk(true)}>
                                     <image
                                         href="/village.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -360,7 +387,7 @@ const DiscoverNepal = () => {
                                         Ghandruk Village
                                     </text>
                                 </g>
-                                <g className={province === 'gandaki' ? "gandaki-place-group p2" : "hide"}>
+                                <g className={province === 'gandaki' ? "gandaki-place-group p2" : "hide"} onClick={() => setGhorepani(true)}>
                                     <image
                                         href="/trek-b.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -370,7 +397,7 @@ const DiscoverNepal = () => {
                                         <tspan x="820" dy="1.2em">(Poon Hill Trek)</tspan>
                                     </text>
                                 </g>
-                                <g className={province === 'gandaki' ? "gandaki-place-group p3" : "hide"}>
+                                <g className={province === 'gandaki' ? "gandaki-place-group p3" : "hide"} onClick={() => setPokhara(true)}>
                                     <image
                                         href="/city.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -379,7 +406,7 @@ const DiscoverNepal = () => {
                                         Pokhara
                                     </text>
                                 </g>
-                                <g className={province === 'gandaki' ? "gandaki-place-group p4" : "hide"}>
+                                <g className={province === 'gandaki' ? "gandaki-place-group p4" : "hide"} onClick={() => setMachhapuchhre(true)}>
                                     <image
                                         href="/mountain.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -398,7 +425,7 @@ const DiscoverNepal = () => {
                                         <tspan x="820" dy="1.2em">(Trek )</tspan>
                                     </text>
                                 </g>
-                                <g className={province === 'gandaki' ? "gandaki-place-group p6" : "hide"}>
+                                <g className={province === 'gandaki' ? "gandaki-place-group p6" : "hide"} onClick={() => setDhaulagiri(true)}>
                                     <image
                                         href="/trek-b.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -737,6 +764,11 @@ const DiscoverNepal = () => {
                     {lalitpur && <Lalitpur handleLalitpurState={handleLalitpurState}></Lalitpur>}
                     {langtangNationalPark && <LangtangNationalPark handleLangtangNationalParkState={handleLangtangNationalParkState}></LangtangNationalPark>}
                     {annapurna && <Annapurna handleAnnapurnaState={handleAnnapurnaState}></Annapurna>}
+                    {pokhara && <Pokhara handlePokharaState={handlePokharaState}></Pokhara>}
+                    {machhapuchhre && <Machhapuchhre handleMachhapuchhreState={handleMachhapuchhreState}></Machhapuchhre>}
+                    {dhaulagiri && <Dhaulagiri handleDhaulagiriState={handleDhaulagiriState}></Dhaulagiri>}
+                    {ghorepani && <Ghorepani handleGhorepaniState={handleGhorepaniState}></Ghorepani>}
+                    {ghandruk && <Ghandruk handleGhandrukState={handleGhandrukState}></Ghandruk>}
                 </div>
                 {tooltip.show && (
                     <div
