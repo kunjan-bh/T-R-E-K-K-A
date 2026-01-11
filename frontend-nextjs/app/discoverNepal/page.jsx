@@ -13,6 +13,8 @@ import GosaikundaLake from "@/components/GosaikundaLake";
 import Kathmandu from "@/components/Kathmandu";
 import Lalitpur from "@/components/Lalitpur";
 import LangtangNationalPark from "@/components/LangtangNationalPark";
+import Annapurna from "@/components/Annapurna";
+
 
 const DiscoverNepal = () => {
 
@@ -29,6 +31,7 @@ const DiscoverNepal = () => {
     const [kathmandu, setKathmandu] = useState(false);
     const [lalitpur, setLalitpur] = useState(false);
     const [langtangNationalPark, setLangtangNationalPark] = useState(false);
+    const [annapurna, setAnnapurna] = useState(false);
 
     const handleMouseMove = (e, name) => {
         setTooltip({
@@ -75,6 +78,9 @@ const DiscoverNepal = () => {
     };
     const handleLangtangNationalParkState = () => {
         setLangtangNationalPark(false);
+    };
+    const handleAnnapurnaState = () => {
+        setAnnapurna(false);
     };
     return (
         <>
@@ -382,7 +388,7 @@ const DiscoverNepal = () => {
                                         Machhapuchhre
                                     </text>
                                 </g>
-                                <g className={province === 'gandaki' ? "gandaki-place-group p5" : "hide"}>
+                                <g className={province === 'gandaki' ? "gandaki-place-group p5" : "hide"} onClick = {() => setAnnapurna(true)}>
                                     <image
                                         href="/trek-b.svg"
                                         preserveAspectRatio="xMidYMid meet"
@@ -730,6 +736,7 @@ const DiscoverNepal = () => {
                     {kathmandu && <Kathmandu handleKathmanduState={handleKathmanduState}></Kathmandu>}
                     {lalitpur && <Lalitpur handleLalitpurState={handleLalitpurState}></Lalitpur>}
                     {langtangNationalPark && <LangtangNationalPark handleLangtangNationalParkState={handleLangtangNationalParkState}></LangtangNationalPark>}
+                    {annapurna && <Annapurna handleAnnapurnaState={handleAnnapurnaState}></Annapurna>}
                 </div>
                 {tooltip.show && (
                     <div

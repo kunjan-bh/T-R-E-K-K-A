@@ -24,6 +24,12 @@ import "./../styles/bhaktapur.css";
 import "./../styles/langtangNationalPark.css";
 import "./../styles/gosaikunda.css";
 import "./../styles/gaurishankar.css";
+import "./../styles/annapurna.css";
+import "./../styles/pokhara.css";
+import "./../styles/dhaulagiri.css"
+import "./../styles/ghandruk.css"
+import "./../styles/ghorepani.css"
+import "./../styles/machhapuchhre.css"
 
 import PageTransition from "@/components/PageTransition";
 
