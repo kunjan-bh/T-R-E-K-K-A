@@ -1,3 +1,4 @@
+// ChatPage.jsx
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -23,61 +24,126 @@ export default function ChatPage() {
         body: JSON.stringify({ message }),
       });
 
+      if (!res.ok) throw new Error("Server error");
+
       const data = await res.json();
 
       setMessages((prev) => [
         ...prev,
-        { role: "bot", content: data.response },
+        { role: "bot", content: data.response || "No response received" },
       ]);
-    } catch {
+    } catch (err) {
+      console.error(err);
       setMessages((prev) => [
         ...prev,
-        { role: "bot", content: "❌ Server error" },
+        { role: "bot", content: "❌ Couldn't connect to server" },
       ]);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  // Auto scroll to bottom
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  return (
-    <div className="max-w-2xl mx-auto my-10 font-sans flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">✈️ Travel Chatbot</h2>
+  const handleExampleClick = (text) => {
+    setMessage(text);
+    // Optional: auto-send → just uncomment next line
+    // sendMessage();
+  };
 
-      <div className="chat-box border border-gray-300 rounded-lg p-4 h-96 overflow-y-auto flex flex-col gap-2 bg-white">
-        {messages.map((msg, i) => (
-        <div
-          key={i}
-          className={`max-w-[80%] p-2 rounded-md mb-2 ${
-            msg.role === "user" ? "bg-green-200 text-black self-end" : "bg-gray-200 text-black self-start"
-          }`}
-        >
-          {msg.content}
+  return (
+    <div className="app-container">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <div className="sidebar-header">
+          <h2 className="logo-chat">PlanGPT</h2>
+          <button className="new-chat-btn">+ New Chat</button>
         </div>
 
-        ))}
+        <div className="chat-history">
+          {/* You can later map real history here */}
+          <div className="history-item active">Current conversation</div>
+          <div className="history-item">Pokhara 5-day itinerary</div>
+          <div className="history-item">Kathmandu food tour</div>
+          <div className="history-item">Chitwan jungle plan</div>
+        </div>
 
-        {loading && <div className="typing">Typing...</div>}
-        <div ref={chatEndRef} />
-      </div>
+        <div className="sidebar-footer">
+          <div className="user-info">You • Kathmandu</div>
+        </div>
+      </aside>
 
-      <div className="flex gap-2">
-        <input
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Ask about travel, destinations, news..."
-          className="flex-1 p-2 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-        />
-        <button
-          onClick={sendMessage}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
-        >
-          Send
-        </button>
+      {/* Main chat area */}
+      <div className="chat-wrapper">
+        <div className="chat-main">
+          {messages.length === 0 ? (
+            <div className="empty-state">
+              <h1 className="hero-title">What can I help you plan?</h1>
+              <div className="examples-grid">
+                <button
+                  className="example-card"
+                  onClick={() => handleExampleClick("Create a 7-day family trip to Pokhara under NPR 80,000")}
+                >
+                  7-day family trip to Pokhara under NPR 80,000
+                </button>
+                <button
+                  className="example-card"
+                  onClick={() => handleExampleClick("Best hidden cafes and restaurants in Thamel right now")}
+                >
+                  Best hidden cafes & restaurants in Thamel 2026
+                </button>
+                <button
+                  className="example-card"
+                  onClick={() => handleExampleClick("Road trip from Kathmandu to Chitwan – best stops & tips")}
+                >
+                  Kathmandu to Chitwan road trip – stops & tips
+                </button>
+                <button
+                  className="example-card"
+                  onClick={() => handleExampleClick("Winter trekking itinerary around Langtang – moderate difficulty")}
+                >
+                  Winter trekking around Langtang (moderate)
+                </button>
+              </div>
+            </div>
+          ) : (
+            <h1 className="chat-title-small">Conversation</h1>
+          )}
+
+          <div className="chat-messages">
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`chat-message ${msg.role === "user" ? "user-msg" : "bot-msg"}`}
+              >
+                {msg.content}
+              </div>
+            ))}
+
+            {loading && <div className="chat-typing">Thinking…</div>}
+            <div ref={chatEndRef} />
+          </div>
+        </div>
+
+        <div className="chat-input-wrapper">
+          <input
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Ask anything about travel…"
+            className="chat-input"
+            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), sendMessage())}
+            disabled={loading}
+          />
+          <button
+            onClick={sendMessage}
+            className="chat-send-btn"
+            disabled={loading || !message.trim()}
+          >
+            ➤
+          </button>
+        </div>
       </div>
     </div>
   );

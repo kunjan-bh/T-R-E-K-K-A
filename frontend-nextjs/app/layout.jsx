@@ -38,6 +38,7 @@ import "./../styles/rara.css"
 import "./../styles/khaptad.css"
 import "./../styles/api.css"
 import "./../styles/sherpa.css"
+import "./../styles/chat.css"
 
 import PageTransition from "@/components/PageTransition";
 
