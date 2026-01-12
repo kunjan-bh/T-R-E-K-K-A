@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -9,4 +11,6 @@ urlpatterns = [
     
     # Social authentication endpoints (Google, Facebook OAuth callbacks)
     path('accounts/', include('allauth.urls')),
-]
+    path('api/',include('chatbot.urls')),
+    path('sherpa/',include('sherpa.urls')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
