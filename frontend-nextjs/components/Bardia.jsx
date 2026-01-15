@@ -11,7 +11,7 @@ const Bardia = ({ handleBardiaState }) => {
   }, [handleBardiaState]);
 
   return (
-    <div className="bardia-overlay" onClick={handleBardiaState}>
+    <div className="place-overlay" onClick={handleBardiaState}>
       <div className="bardia-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="bardia-close-btn" onClick={handleBardiaState} aria-label="Close">

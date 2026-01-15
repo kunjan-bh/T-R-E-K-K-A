@@ -11,7 +11,7 @@ const Dharan = ({ handleDharanState }) => {
   }, [handleDharanState]);
 
   return (
-    <div className="dharan-overlay" onClick={handleDharanState}>
+    <div className="place-overlay" onClick={handleDharanState}>
       <div className="dharan-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="dharan-close-btn" onClick={handleDharanState} aria-label="Close">

@@ -11,7 +11,7 @@ const Illam = ({ handleIllamState }) => {
   }, [handleIllamState]);
 
   return (
-    <div className="illam-overlay" onClick={handleIllamState}>
+    <div className="place-overlay" onClick={handleIllamState}>
       <div className="illam-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="illam-close-btn" onClick={handleIllamState} aria-label="Close">

@@ -11,7 +11,7 @@ const Api = ({ handleApiState }) => {
   }, [handleApiState]);
 
   return (
-    <div className="api-overlay" onClick={handleApiState}>
+    <div className="place-overlay" onClick={handleApiState}>
       <div className="api-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="api-close-btn" onClick={handleApiState} aria-label="Close">

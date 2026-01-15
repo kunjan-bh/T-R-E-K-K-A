@@ -11,7 +11,7 @@ const Dhaulagiri = ({ handleDhaulagiriState }) => {
   }, [handleDhaulagiriState]);
 
   return (
-    <div className="dhaulagiri-overlay" onClick={handleDhaulagiriState}>
+    <div className="place-overlay" onClick={handleDhaulagiriState}>
       <div className="dhaulagiri-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="dhaulagiri-close-btn" onClick={handleDhaulagiriState} aria-label="Close">

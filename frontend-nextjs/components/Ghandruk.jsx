@@ -11,7 +11,7 @@ const Ghandruk = ({ handleGhandrukState }) => {
     }, [handleGhandrukState]);
 
     return (
-        <div className="ghandruk-overlay" onClick={handleGhandrukState}>
+        <div className="place-overlay" onClick={handleGhandrukState}>
             <div className="ghandruk-modal" onClick={(e) => e.stopPropagation()}>
 
                 <button className="ghandruk-close-btn" onClick={handleGhandrukState} aria-label="Close">

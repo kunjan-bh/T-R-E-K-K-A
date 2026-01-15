@@ -11,7 +11,7 @@ const EverestRegion = ({ handleEverestRegionState }) => {
   }, [handleEverestRegionState]);
 
   return (
-    <div className="everest-region-overlay" onClick={handleEverestRegionState}>
+    <div className="place-overlay" onClick={handleEverestRegionState}>
       <div className="everest-region-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="everest-region-close-btn" onClick={handleEverestRegionState} aria-label="Close">

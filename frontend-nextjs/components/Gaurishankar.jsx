@@ -11,7 +11,7 @@ const Gaurishankar = ({ handleGaurishankarState }) => {
   }, [handleGaurishankarState]);
 
   return (
-    <div className="gaurishankar-overlay" onClick={handleGaurishankarState}>
+    <div className="place-overlay" onClick={handleGaurishankarState}>
       <div className="gaurishankar-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="gaurishankar-close-btn" onClick={handleGaurishankarState} aria-label="Close">

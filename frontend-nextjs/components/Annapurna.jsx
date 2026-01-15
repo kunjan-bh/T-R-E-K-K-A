@@ -11,7 +11,7 @@ const Annapurna = ({ handleAnnapurnaState }) => {
   }, [handleAnnapurnaState]);
 
   return (
-    <div className="annapurna-overlay" onClick={handleAnnapurnaState}>
+    <div className="place-overlay" onClick={handleAnnapurnaState}>
       <div className="annapurna-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="annapurna-close-btn" onClick={handleAnnapurnaState} aria-label="Close">
