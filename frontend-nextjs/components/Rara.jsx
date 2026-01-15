@@ -11,7 +11,7 @@ const Rara = ({ handleRaraState }) => {
   }, [handleRaraState]);
 
   return (
-    <div className="rara-overlay" onClick={handleRaraState}>
+    <div className="place-overlay" onClick={handleRaraState}>
       <div className="rara-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="rara-close-btn" onClick={handleRaraState} aria-label="Close">

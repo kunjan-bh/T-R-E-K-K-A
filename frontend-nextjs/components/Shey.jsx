@@ -11,7 +11,7 @@ const Shey = ({ handleSheyState }) => {
   }, [handleSheyState]);
 
   return (
-    <div className="shey-overlay" onClick={handleSheyState}>
+    <div className="place-overlay" onClick={handleSheyState}>
       <div className="shey-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="shey-close-btn" onClick={handleSheyState} aria-label="Close">

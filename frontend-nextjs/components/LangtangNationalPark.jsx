@@ -11,7 +11,7 @@ const LangtangNationalPark = ({ handleLangtangNationalParkState }) => {
   }, [handleLangtangNationalParkState]);
 
   return (
-    <div className="langtang-national-park-overlay" onClick={handleLangtangNationalParkState}>
+    <div className="place-overlay" onClick={handleLangtangNationalParkState}>
       <div className="langtang-national-park-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="langtang-national-park-close-btn" onClick={handleLangtangNationalParkState} aria-label="Close">

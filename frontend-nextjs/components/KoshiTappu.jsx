@@ -11,7 +11,7 @@ const KoshiTappu = ({ handleKoshiTappuState }) => {
   }, [handleKoshiTappuState]);
 
   return (
-    <div className="koshiTappu-overlay" onClick={handleKoshiTappuState}>
+    <div className="place-overlay" onClick={handleKoshiTappuState}>
       <div className="koshiTappu-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="koshiTappu-close-btn" onClick={handleKoshiTappuState} aria-label="Close">

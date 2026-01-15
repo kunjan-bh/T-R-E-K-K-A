@@ -11,7 +11,7 @@ const SheyLake = ({ handleSheyLakeState }) => {
   }, [handleSheyLakeState]);
 
   return (
-    <div className="shey-lake-overlay" onClick={handleSheyLakeState}>
+    <div className="place-overlay" onClick={handleSheyLakeState}>
       <div className="shey-lake-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="shey-lake-close-btn" onClick={handleSheyLakeState} aria-label="Close">

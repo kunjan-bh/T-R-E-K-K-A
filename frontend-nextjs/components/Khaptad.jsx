@@ -11,7 +11,7 @@ const Khaptad = ({ handleKhaptadState }) => {
   }, [handleKhaptadState]);
 
   return (
-    <div className="khaptad-overlay" onClick={handleKhaptadState}>
+    <div className="place-overlay" onClick={handleKhaptadState}>
       <div className="khaptad-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="khaptad-close-btn" onClick={handleKhaptadState} aria-label="Close">

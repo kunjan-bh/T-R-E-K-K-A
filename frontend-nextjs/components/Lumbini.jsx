@@ -11,7 +11,7 @@ const Lumbini = ({ handleLumbiniState }) => {
   }, [handleLumbiniState]);
 
   return (
-    <div className="lumbini-overlay" onClick={handleLumbiniState}>
+    <div className="place-overlay" onClick={handleLumbiniState}>
       <div className="lumbini-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="lumbini-close-btn" onClick={handleLumbiniState} aria-label="Close">

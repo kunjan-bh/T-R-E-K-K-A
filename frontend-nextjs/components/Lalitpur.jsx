@@ -11,7 +11,7 @@ const Lalitpur = ({ handleLalitpurState }) => {
   }, [handleLalitpurState]);
 
   return (
-    <div className="lalitpur-overlay" onClick={handleLalitpurState}>
+    <div className="place-overlay" onClick={handleLalitpurState}>
       <div className="lalitpur-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="lalitpur-close-btn" onClick={handleLalitpurState} aria-label="Close">

@@ -11,7 +11,7 @@ const Pokhara = ({ handlePokharaState }) => {
     }, [handlePokharaState]);
 
     return (
-        <div className="pokhara-overlay" onClick={handlePokharaState}>
+        <div className="place-overlay" onClick={handlePokharaState}>
             <div className="pokhara-modal" onClick={(e) => e.stopPropagation()}>
 
                 <button className="pokhara-close-btn" onClick={handlePokharaState} aria-label="Close">

@@ -11,7 +11,7 @@ const Machhapuchhre = ({ handleMachhapuchhreState }) => {
     }, [handleMachhapuchhreState]);
 
     return (
-        <div className="machhapuchhre-overlay" onClick={handleMachhapuchhreState}>
+        <div className="place-overlay" onClick={handleMachhapuchhreState}>
             <div className="machhapuchhre-modal" onClick={(e) => e.stopPropagation()}>
 
                 <button className="machhapuchhre-close-btn" onClick={handleMachhapuchhreState} aria-label="Close">
