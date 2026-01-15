@@ -113,19 +113,37 @@ export default function SherpaDashboard() {
         </div>
 
         {!status?.is_sherpa && (
-          <div className="sherpa-info-section info-not-registered">
-            <div className="info-content">
-              <h2>Join Our Professional Guide Community</h2>
-              <p>Become a certified guide and connect with travelers looking for authentic experiences across Nepal.</p>
-              <ul className="info-benefits">
-                <li>Showcase your expertise in trekking & cultural tours</li>
-                <li>Set your own daily rates and availability</li>
-                <li>Build reputation with verified status</li>
-                <li>Direct bookings from adventure seekers</li>
-              </ul>
-              <button className="sherpa-btn sherpa-btn-register" onClick={() => setRegister(true)}>
-                Register Now
-              </button>
+          <div className="register_area">
+            <div className="register-div">
+              <div className="sherpa-info-section info-not-registered">
+                <div className="info-content">
+                  <h2>Join Our Professional Guide Community <span>(Career)</span></h2>
+                  <p><span>Become a certified guide</span> and connect with travelers looking for authentic experiences across Nepal.</p>
+                  <ul className="info-benefits">
+                    <li>Showcase your expertise in trekking & cultural tours</li>
+                    <li>Set your own daily rates and availability</li>
+                    <li>Build reputation with verified status</li>
+                    <li>Direct bookings from adventure seekers</li>
+                  </ul>
+                  <button className="sherpa-btn sherpa-btn-register" onClick={() => setRegister(true)}>
+                    Register Now
+                  </button>
+                </div>
+
+              </div>
+              <div className="analytics-area">
+                <div className="register-analytics">
+
+                </div>
+                <div className="register-analytics">
+
+                </div>
+              </div>
+            </div>
+            <div className="marquee_register">
+              <div className="marquee-content">
+                <p>Join Our Professional Guide Community (Career)</p>
+              </div>
             </div>
           </div>
         )}
