@@ -11,7 +11,7 @@ const Janaki = ({ handleJanakiState }) => {
   }, [handleJanakiState]);
 
   return (
-    <div className="janaki-overlay" onClick={handleJanakiState}>
+    <div className="place-overlay" onClick={handleJanakiState}>
       <div className="janaki-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="janaki-close-btn" onClick={handleJanakiState} aria-label="Close">

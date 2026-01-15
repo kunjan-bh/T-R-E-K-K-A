@@ -12,7 +12,7 @@ const GosaikundaLake = ({ handleGosaikundaLakeState }) => {
   }, [handleGosaikundaLakeState]);
 
   return (
-    <div className="gosaikunda-overlay" onClick={handleGosaikundaLakeState}>
+    <div className="place-overlay" onClick={handleGosaikundaLakeState}>
       <div className="gosaikunda-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="gosaikunda-close-btn" onClick={handleGosaikundaLakeState} aria-label="Close">

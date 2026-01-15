@@ -11,7 +11,7 @@ const Ghorepani = ({ handleGhorepaniState }) => {
     }, [handleGhorepaniState]);
 
     return (
-        <div className="ghorepani-overlay" onClick={handleGhorepaniState}>
+        <div className="place-overlay" onClick={handleGhorepaniState}>
             <div className="ghorepani-modal" onClick={(e) => e.stopPropagation()}>
 
                 <button className="ghorepani-close-btn" onClick={handleGhorepaniState} aria-label="Close">

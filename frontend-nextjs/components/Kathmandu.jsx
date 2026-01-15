@@ -11,7 +11,7 @@ const Kathmandu = ({ handleKathmanduState }) => {
   }, [handleKathmanduState]);
 
   return (
-    <div className="kathmandu-overlay" onClick={handleKathmanduState}>
+    <div className="place-overlay" onClick={handleKathmanduState}>
       <div className="kathmandu-modal" onClick={(e) => e.stopPropagation()}>
 
         <button className="kathmandu-close-btn" onClick={handleKathmanduState} aria-label="Close">
