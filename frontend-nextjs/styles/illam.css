@@ -302,6 +302,25 @@
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
 }
+.mini-div {
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.mini-div-header img {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.mini-div .text {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.mini-div.left .text {
+    transform: translateX(-6px);
+}
+
+.mini-div.right .text {
+    transform: translateX(6px);
+}
+.mini-div:hover {
+    transform: scale(1.02);
+}
 
 
 @keyframes growText {
@@ -375,3 +394,5 @@
         max-width: 100%;
     }
 }
+
+

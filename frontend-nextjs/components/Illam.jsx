@@ -17,19 +17,28 @@ const Illam = ({ handleIllamState }) => {
   ]
   const [testIndex, setTestIndex] = useState(0)
 
-  const Emoji = [
+  const EmojiLeft = [
     "leaf1.svg",
+    "travel.png",
+  ]
+  const EmojiRight = [
     "hill.svg",
+    "gardening.png"
   ]
   const [emojiIndex, setEmojiIndex] = useState(0)
-  
-  const emojiText = [
-    "The Queen of Hills • Famous for Tea Gardens",
-    "Cool hills and mist around the hills.",
+
+  const emojiTextLeft = [
+    "Endless tea gardens rolling over emerald hills — Ilām’s signature charm.",
     "Tea gardens everywhere, Peaceful eastern Nepal.",
-    "The Queen of Hills • Famous for Tea Gardens",
-    "Cool hills and mist",
-    "Tea gardens everywhere, Peaceful eastern Nepal.",
+    "Winding hill roads leading to peaceful viewpoints.",
+    "Kanyam Tea Garden (MOST famous), Mai Pokhari (Sacred Lake)",
+  ]
+
+  const emojiTextRight = [
+    "Fresh air, green tea estates, and calm mornings in eastern Nepal.",
+    "Soft mountain air, winding roads, and serene hilltop landscapes.",
+    "Scenic routes with views that make you stop and breathe.",
+    "Ilām Bazaar, Fikkal Bazaar, Sandakpur Viewpoint",
   ]
   const [emojiTextIndex, setEmojiTextIndex] = useState(0)
 
@@ -41,6 +50,17 @@ const Illam = ({ handleIllamState }) => {
       setTestIndex(0)
     }
   }
+  const handleEmojiIndex = () => {
+    setEmojiIndex(emojiIndex + 1)
+    setEmojiTextIndex(emojiTextIndex + 1)
+    if (emojiIndex === EmojiLeft.length - 1) {
+      setEmojiIndex(0)
+    }
+    if (emojiTextIndex === emojiTextLeft.length - 2) {
+      setEmojiTextIndex(0)
+    }
+  };
+
   // Close on Escape key
   useEffect(() => {
     const handleEsc = (e) => {
@@ -62,13 +82,13 @@ const Illam = ({ handleIllamState }) => {
         {imgMode &&
           <div className="mini-div left">
             <div className="text">
-              <p>{emojiText[emojiTextIndex]}</p>
+              <p>{emojiTextLeft[emojiTextIndex]}</p>
             </div>
             <div className="mini-div-header">
-              <img src={Emoji[emojiIndex]} alt="" />
+              <img src={EmojiLeft[emojiIndex]} />
             </div>
             <div className="text">
-              <p>{emojiText[emojiTextIndex + 1]}</p>
+              <p>{emojiTextLeft[emojiTextIndex + 1]}</p>
             </div>
           </div>
         }
@@ -85,7 +105,7 @@ const Illam = ({ handleIllamState }) => {
                 <h1>Ilām</h1>
                 <p className="subtitle">{Test[testIndex]}</p>
               </div>
-              <button className="arrow" onClick={handleIndex}>
+              <button className="arrow" onClick={()=>{handleIndex(); handleEmojiIndex()}}>
                 <img src="/arrow.svg" alt="" />
               </button>
 
@@ -102,13 +122,13 @@ const Illam = ({ handleIllamState }) => {
         {imgMode &&
           <div className="mini-div right">
             <div className="text">
-              <p>{emojiText[emojiTextIndex + 2]}</p>
+              <p>{emojiTextRight[emojiTextIndex]}</p>
             </div>
             <div className="mini-div-header">
-              <img src={Emoji[emojiIndex+1]} alt="" />
+              <img src={EmojiRight[emojiIndex]} />
             </div>
             <div className="text">
-              <p>{emojiText[emojiTextIndex+3]}</p>
+              <p>{emojiTextRight[emojiTextIndex + 1]}</p>
             </div>
           </div>
         }
