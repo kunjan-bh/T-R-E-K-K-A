@@ -1,138 +1,60 @@
+/* ────────────────────────────────────────────────
+   Everest Region — Full bg image + cycling + side cards
+   (icy / majestic Himalayan theme)
+   ──────────────────────────────────────────────── */
 
-
-/* Modal Card */
-.everest-region-modal {
-  position: relative;
-  width: 90%;
-  max-width: 900px;
-  height: 85vh;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
-  
-  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  display: flex;
-  flex-direction: column;
-}
-/* Overlay Background - BLUR ONLY HERE */
-
-
-/* Close Button */
+/* Close button (white, semi-transparent for snowy images) */
 .everest-region-close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 10;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.14);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(6px);
 }
 
 .everest-region-close-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(1.08);
 }
 
-/* Header */
-.everest-region-header {
-    padding: 40px 40px 20px;
-    text-align: center;
-    color: white;
+/* Arrow button (next image) */
+.everest-region-arrow {
+  position: absolute;
+  bottom: 12%;
+  right: 8%;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  z-index: 5;
 }
 
-.everest-region-header h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin: 0;
-    background: linear-gradient(90deg, #a8e6cf, #dcedc1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.everest-region-arrow img {
+  width: 38px;
+  height: 38px;
+  filter: brightness(1.2);
 }
 
-/* Body */
-.everest-region-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 40px;
-    display: flex;
-    gap: 30px;
-    align-items: center;
+.everest-region-arrow:hover {
+  transform: scale(1.12);
+  background: rgba(255, 255, 255, 0.24);
 }
 
-.everest-region-image-placeholder img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 16px;
-    object-fit: cover;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.everest-region-info {
-    flex: 1;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
-    line-height: 1.7;
-}
-/* Footer */
-.everest-region-footer {
-    padding: 30px 40px;
-    text-align: center;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(60px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .everest-region-modal {
-        width: 95%;
-        height: 90vh;
-        border-radius: 20px;
-    }
-
-    .everest-region-header h1 {
-        font-size: 2.8rem;
-    }
-
-    .everest-region-body {
-        flex-direction: column;
-        padding: 0 20px 20px;
-    }
-
-    .everest-region-image-placeholder img {
-        max-width: 100%;
-    }
-}

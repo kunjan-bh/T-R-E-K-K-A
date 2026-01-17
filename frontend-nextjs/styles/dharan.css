@@ -1,180 +1,143 @@
+/* ────────────────────────────────────────────────
+   Dharan — Full background image + cycling + side mini cards
+   (matches Illam / Koshi Tappu visual language)
+   ──────────────────────────────────────────────── */
 
-
-/* Modal Card */
+/* Main wrapper — same as Illam */
 .dharan-modal {
   position: relative;
-  width: 90%;
-  max-width: 900px;
+  width: 100%;
+  max-width: 60%;
   height: 85vh;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  background: transparent;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
-  
   animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   display: flex;
   flex-direction: column;
 }
-/* Overlay Background - BLUR ONLY HERE */
 
-
-/* Close Button */
+/* Close button (white version for dark overlay images) */
 .dharan-close-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    z-index: 10;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .dharan-close-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.08);
 }
 
-/* Header */
+/* Title + cycling subtitle overlay */
 .dharan-header {
-    padding: 40px 40px 20px;
-    text-align: center;
-    color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  width: 80%;
+  max-width: 600px;
+  pointer-events: none; /* so clicks go through to arrow/next */
 }
 
 .dharan-header h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin: 0;
-    background: linear-gradient(90deg, #a8e6cf, #dcedc1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  font-size: 4.2rem;
+  font-weight: 800;
+  margin: 0 0 12px;
+  background: linear-gradient(90deg, #ffd166, #ef476f, #ffd166);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientFlow 10s ease infinite;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 
-.subtitle {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    margin-top: 8px;
-    font-weight: 300;
+.dharan-header .subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  opacity: 0.95;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
 }
 
-/* Body */
-.dharan-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 40px;
-    display: flex;
-    gap: 30px;
-    align-items: center;
+/* Arrow button (next image) */
+.dharan-arrow {
+  position: absolute;
+  bottom: 12%;
+  right: 8%;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  z-index: 5;
+}
+
+.dharan-arrow img {
+  width: 36px;
+  height: 36px;
+}
+
+.dharan-arrow:hover {
+  transform: scale(1.12);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Favorite button (top-left, same style as Illam) */
+.dharan-favorite-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+/* Background image full cover */
+.dharan-image-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .dharan-image-placeholder img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 16px;
-    object-fit: cover;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.dharan-info {
-    flex: 1;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
-    line-height: 1.7;
-}
-
-.highlights {
-    margin: 20px 0;
-    padding-left: 20px;
-}
-
-.highlights li {
-    margin: 10px 0;
-    position: relative;
-}
-
-.highlights li::before {
-    content: "✦";
-    color: #a8e6cf;
-    position: absolute;
-    left: -20px;
-}
-
-/* Footer */
-.dharan-footer {
-    padding: 30px 40px;
-    text-align: center;
-}
-
-.explore-btn {
-    padding: 14px 32px;
-    font-size: 1.1rem;
-    background: linear-gradient(90deg, #a8e6cf, #88d8b0);
-    color: #16213e;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: transform 0.3s ease;
-}
-
-.explore-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(168, 230, 207, 0.3);
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(60px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .dharan-modal {
-        width: 95%;
-        height: 90vh;
-        border-radius: 20px;
-    }
-
-    .dharan-header h1 {
-        font-size: 2.8rem;
-    }
-
-    .dharan-body {
-        flex-direction: column;
-        padding: 0 20px 20px;
-    }
-
-    .dharan-image-placeholder img {
-        max-width: 100%;
-    }
-}
+/* ── Re-use your existing shared classes ── */
+/* (no need to duplicate these — just make sure they're loaded) */
+/*
+.place-overlay { ... }
+.place-overlay-null { ... }
+.overlay-layout { ... }
+.mini-div { ... }
+.mini-div.left { ... }
+.mini-div.right { ... }
+.mini-div-header img { ... }
+.mini-div .text { ... }
+.grow-text { ... }
+.favorite-btn / .fav-* { ... }
+*/
