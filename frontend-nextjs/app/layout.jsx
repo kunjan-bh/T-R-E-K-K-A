@@ -13,11 +13,7 @@ import "./../styles/aboutus.css";
 import "./../styles/Loading.css";
 import "./../styles/ForgetPassword.css";
 import "./../styles/discoverNepal.css";
-import "./../styles/illam.css";
-import "./../styles/everestRegion.css";
-import "./../styles/koshiTappu.css";
 import "./../styles/janaki.css";
-import "./../styles/dharan.css";
 import "./../styles/lalitpur.css";
 import "./../styles/kathmandu.css";
 import "./../styles/bhaktapur.css";
@@ -39,6 +35,7 @@ import "./../styles/khaptad.css"
 import "./../styles/api.css"
 import "./../styles/sherpa.css"
 import "./../styles/chat.css"
+import "./../styles/place.css"
 
 import PageTransition from "@/components/PageTransition";
 
